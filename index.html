@@ -4,748 +4,1432 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Semana Acadêmica Integrada 2026 - UNICEPLAC</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <title>Semana Acadêmica Integrada 2026 — UNICEPLAC</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
+    *,
+    *::before,
+    *::after {
       box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
+
+    :root {
+      --green: #1b6e3f;
+      --green-d: #145630;
+      --green-l: #e8f5ee;
+      --green-m: #c3e6d0;
+      --orange: #d4622a;
+      --orange-l: #fdf0ea;
+      --bg: #f2f4f6;
+      --surf: #ffffff;
+      --surf2: #f7f8fa;
+      --bd: #e3e6ea;
+      --bd2: #cdd1d8;
+      --txt: #111827;
+      --txt2: #374151;
+      --muted: #6b7280;
+      --faint: #9ca3af;
+      --r: 12px;
+      --rs: 8px;
+      --rxs: 5px;
+      --sh: 0 1px 3px rgba(0, 0, 0, .08), 0 4px 16px rgba(0, 0, 0, .05);
+      --sh-hover: 0 4px 12px rgba(0, 0, 0, .12), 0 8px 24px rgba(0, 0, 0, .07);
+    }
+
+    html {
+      scroll-behavior: smooth
     }
 
     body {
-      font-family: 'Roboto', sans-serif;
-      line-height: 1.6;
-      color: #333;
-      background: #f8f9fa;
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--txt);
+      min-height: 100vh;
+      font-size: 14px;
+      line-height: 1.6
     }
 
-    .header {
-      background: linear-gradient(135deg, #00734f 0%, #421b71 100%);
-      color: white;
-      padding: 1rem 2rem;
+    /* ── HEADER ── */
+    #hdr {
+      background: var(--surf);
+      border-bottom: 1px solid var(--bd);
+      position: sticky;
+      top: 0;
+      z-index: 60;
+      box-shadow: 0 1px 0 var(--bd)
+    }
+
+    .hdr-inner {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 1rem;
+      gap: 16px;
+      padding: 12px 32px;
+      flex-wrap: wrap
     }
 
-    .logo {
-      width: 12rem;
-      height: 3rem;
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: #fff;
-    }
-
-    .title {
-      flex: 1;
-      text-align: center;
-      font-size: 2rem;
-      font-weight: 300;
-    }
-
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1rem;
-    }
-
-    .stat {
-      background: rgba(255, 255, 255, 0.2);
-      padding: 0.5rem 1rem;
-      border-radius: 8px;
-      text-align: center;
-    }
-
-    .calendar-strip {
-      display: flex;
-      justify-content: center;
-      gap: 0.5rem;
-      padding: 1rem;
-      background: white;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    }
-
-    .day-btn {
-      padding: 0.75rem 1.5rem;
-      border: none;
-      background: #f1f3f4;
-      border-radius: 25px;
-      cursor: pointer;
-      transition: all 0.3s;
-      font-weight: 500;
-    }
-
-    .day-btn.active {
-      background: #667eea;
-      color: white;
-    }
-
-    .day-btn:hover {
-      background: #667eea;
-      opacity: 0.8;
-      color: white;
-    }
-
-    .filters {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      padding: 1rem 2rem;
-      background: white;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    }
-
-    .filters input,
-    .filters select {
-      padding: 0.75rem;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      flex: 1;
-      min-width: 200px;
-    }
-
-    .filter-group {
-      display: flex;
-      gap: 0.5rem;
-      flex-wrap: wrap;
-    }
-
-    .pub-btn,
-    .chip {
-      padding: 0.5rem 1rem;
-      border: 1px solid #ddd;
-      background: white;
-      border-radius: 20px;
-      cursor: pointer;
-      transition: all 0.3s;
-    }
-
-    .pub-btn.active,
-    .chip.active {
-      background: #667eea;
-      color: white;
-      border-color: #667eea;
-    }
-
-    .btn-clear {
-      padding: 0.75rem 1.5rem;
-      background: #e74c3c;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: 500;
-    }
-
-    .active-filters {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      padding: 1rem 2rem;
-      background: white;
-    }
-
-    .active-tag {
-      background: #e3f2fd;
-      color: #1976d2;
-      padding: 0.25rem 0.75rem;
-      border-radius: 20px;
-      font-size: 0.875rem;
+    .brand {
       display: flex;
       align-items: center;
-      gap: 0.5rem;
+      gap: 16px
     }
 
-    .remove-tag {
-      background: #bbdefb;
-      color: #1976d2;
-      border: none;
+    .brand-logo {
+      height: 40px;
+      width: auto;
+      object-fit: contain;
+      flex-shrink: 0
+    }
+
+    .brand-divider {
+      width: 1px;
+      height: 28px;
+      background: var(--bd);
+      flex-shrink: 0
+    }
+
+    .brand-lbl {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+      color: var(--faint);
+      margin-bottom: 1px
+    }
+
+    .brand-ttl {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--txt);
+      line-height: 1.2;
+      letter-spacing: -.3px
+    }
+
+    .hdr-stats {
+      display: flex;
+      gap: 6px;
+      align-items: center
+    }
+
+    .stat-card {
+      background: var(--surf2);
+      border: 1px solid var(--bd);
+      border-radius: var(--rs);
+      padding: 5px 12px;
+      text-align: center;
+      min-width: 64px
+    }
+
+    .stat-v {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--txt);
+      line-height: 1
+    }
+
+    .stat-l {
+      font-size: 9px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .8px;
+      color: var(--faint);
+      margin-top: 1px
+    }
+
+    /* ── CALENDAR ── */
+    #cal-wrap {
+      background: var(--surf);
+      border-bottom: 1px solid var(--bd);
+      padding: 12px 32px 14px
+    }
+
+    .cal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px
+    }
+
+    .cal-title {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--faint)
+    }
+
+    .cal-hint {
+      font-size: 11px;
+      color: var(--faint)
+    }
+
+    #cal {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 2px;
+      scroll-snap-type: x mandatory
+    }
+
+    #cal::-webkit-scrollbar {
+      height: 3px
+    }
+
+    #cal::-webkit-scrollbar-thumb {
+      background: var(--bd2);
+      border-radius: 2px
+    }
+
+    .cal-day {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 10px 16px;
+      border-radius: var(--r);
+      border: 2px solid var(--bd);
+      background: var(--surf2);
+      cursor: pointer;
+      transition: all .18s;
+      flex-shrink: 0;
+      min-width: 86px;
+      scroll-snap-align: start;
+      user-select: none;
+    }
+
+    .cal-day:hover {
+      border-color: var(--green-m);
+      background: var(--green-l)
+    }
+
+    .cal-day.on {
+      background: var(--green);
+      border-color: var(--green-d)
+    }
+
+    .cal-day .dow {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--faint);
+      margin-bottom: 3px
+    }
+
+    .cal-day .dn {
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--txt);
+      line-height: 1;
+      letter-spacing: -1px
+    }
+
+    .cal-day .month {
+      font-size: 10px;
+      color: var(--faint);
+      margin-top: 1px
+    }
+
+    .cal-day .cnt {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--muted);
+      margin-top: 7px;
+      padding-top: 7px;
+      border-top: 1px solid var(--bd);
+      width: 100%;
+      text-align: center
+    }
+
+    .cal-day.on .dow,
+    .cal-day.on .dn,
+    .cal-day.on .month {
+      color: rgba(255, 255, 255, .8)
+    }
+
+    .cal-day.on .cnt {
+      color: rgba(255, 255, 255, .9);
+      border-top-color: rgba(255, 255, 255, .2)
+    }
+
+    .cal-dots {
+      display: flex;
+      gap: 3px;
+      justify-content: center;
+      margin-top: 5px;
+      flex-wrap: wrap;
+      max-width: 64px
+    }
+
+    .cal-dot {
+      width: 5px;
+      height: 5px;
       border-radius: 50%;
-      width: 20px;
-      height: 20px;
+      flex-shrink: 0;
+      opacity: .85
+    }
+
+    .cal-day.on .cal-dot {
+      opacity: .7;
+      filter: brightness(1.4)
+    }
+
+    /* ── FILTER BAR ── */
+    #fbar {
+      background: var(--surf);
+      border-bottom: 1px solid var(--bd);
+      padding: 10px 32px 12px;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      flex-wrap: wrap
+    }
+
+    .fsep {
+      width: 1px;
+      height: 18px;
+      background: var(--bd);
+      flex-shrink: 0;
+      align-self: center
+    }
+
+    .flbl {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .8px;
+      color: var(--faint);
+      white-space: nowrap
+    }
+
+    /* Search */
+    .srch-wrap {
+      position: relative
+    }
+
+    .srch-wrap svg {
+      position: absolute;
+      left: 9px;
+      top: 50%;
+      transform: translateY(-50%);
+      pointer-events: none;
+      color: var(--faint)
+    }
+
+    .srch {
+      font-family: inherit;
+      font-size: 13px;
+      padding: 7px 10px 7px 31px;
+      border: 1.5px solid var(--bd);
+      border-radius: var(--rs);
+      background: var(--surf2);
+      color: var(--txt);
+      width: 200px;
+      outline: none;
+      transition: border-color .15s, background .15s
+    }
+
+    .srch:focus {
+      border-color: var(--green);
+      background: var(--surf)
+    }
+
+    .srch::placeholder {
+      color: var(--faint)
+    }
+
+    /* Course dropdown */
+    .curso-select {
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 500;
+      padding: 7px 28px 7px 10px;
+      border: 1.5px solid var(--bd);
+      border-radius: var(--rs);
+      background: var(--surf2);
+      color: var(--txt);
+      outline: none;
       cursor: pointer;
-      font-size: 0.875rem;
+      transition: border-color .15s;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%236b7280' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 8px center;
+      min-width: 160px
     }
 
-    .activities {
-      padding: 2rem;
-      max-width: 1400px;
-      margin: 0 auto;
+    .curso-select:focus {
+      border-color: var(--green)
     }
 
-    .group-section {
-      margin-bottom: 3rem;
+    /* Chips */
+    .chip,
+    .grpbtn,
+    .clearbtn {
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 500;
+      padding: 4px 11px;
+      border-radius: 20px;
+      border: 1.5px solid var(--bd);
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all .13s;
+      white-space: nowrap;
+      line-height: 1.5
     }
 
-    .group-section h3 {
-      font-size: 1.5rem;
-      margin-bottom: 1rem;
-      color: #333;
+    .chip:hover,
+    .grpbtn:hover {
+      border-color: var(--bd2);
+      color: var(--txt2)
     }
 
-    .grid {
+    .chip.on {
+      background: var(--green-l);
+      border-color: var(--green);
+      color: var(--green-d);
+      font-weight: 600
+    }
+
+    .grpbtn {
+      border-radius: var(--rs)
+    }
+
+    .grpbtn.on {
+      background: var(--surf2);
+      border-color: var(--bd2);
+      color: var(--txt);
+      font-weight: 600
+    }
+
+    .clearbtn {
+      border-radius: var(--rs);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      border-color: var(--bd2);
+      color: var(--muted)
+    }
+
+    .clearbtn:hover {
+      border-color: #dc2626;
+      color: #dc2626;
+      background: #fef2f2
+    }
+
+    .clearbtn.hidden {
+      display: none
+    }
+
+    .frow {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      flex-wrap: wrap
+    }
+
+    /* ── ACTIVE FILTER STRIP ── */
+    #active-bar {
+      background: var(--green-l);
+      border-bottom: 1px solid var(--green-m);
+      padding: 8px 32px;
+      display: none;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap
+    }
+
+    #active-bar.show {
+      display: flex
+    }
+
+    .af-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--green-d);
+      text-transform: uppercase;
+      letter-spacing: .8px
+    }
+
+    .af-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--green-d);
+      background: var(--surf);
+      border: 1px solid var(--green-m);
+      border-radius: 20px;
+      padding: 2px 10px;
+      cursor: pointer
+    }
+
+    .af-tag:hover {
+      background: var(--green-m)
+    }
+
+    .af-tag svg {
+      opacity: .6
+    }
+
+    /* ── MAIN ── */
+    #main {
+      padding: 24px 32px 56px
+    }
+
+    /* ── SECTION ── */
+    .section-hdr {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 0 12px;
+      margin-top: 8px
+    }
+
+    .section-hdr:first-child {
+      margin-top: 0
+    }
+
+    .s-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 3px;
+      background: var(--green);
+      flex-shrink: 0
+    }
+
+    .s-name {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--txt);
+      letter-spacing: -.2px
+    }
+
+    .s-meta {
+      font-size: 12px;
+      color: var(--faint);
+      font-weight: 500
+    }
+
+    .s-line {
+      flex: 1;
+      height: 1px;
+      background: var(--bd)
+    }
+
+    /* ── CARD GRID ── */
+    .card-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fill, minmax(272px, 1fr));
+      gap: 12px;
+      margin-bottom: 24px
     }
 
+    /* ── CARD ── */
     .card {
-      background: white;
-      border-radius: 12px;
-      padding: 1.5rem;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      background: var(--surf);
+      border-radius: var(--r);
+      border: 1px solid var(--bd);
       cursor: pointer;
-      transition: all 0.3s;
+      transition: border-color .15s, box-shadow .15s, transform .15s;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      border-left: 4px solid var(--bd2);
+      position: relative;
     }
 
     .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+      border-color: var(--bd2);
+      box-shadow: var(--sh-hover);
+      transform: translateY(-1px)
     }
 
-    .badges-top {
+    .card.sel {
+      border-color: var(--green) !important;
+      box-shadow: 0 0 0 3px var(--green-l) !important;
+      transform: translateY(-1px)
+    }
+
+    .card-top {
+      padding: 12px 14px 10px;
+      flex: 1
+    }
+
+    .card-meta {
       display: flex;
+      align-items: center;
       justify-content: space-between;
-      margin-bottom: 1rem;
+      gap: 6px;
+      margin-bottom: 8px
     }
 
-    .badge {
-      padding: 0.25rem 0.75rem;
-      border-radius: 20px;
-      font-size: 0.75rem;
+    .tipo-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .6px;
+      padding: 3px 8px;
+      border-radius: 4px;
+      flex-shrink: 0;
+      line-height: 1.4
+    }
+
+    .dia-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 4px;
+      background: var(--surf2);
+      border: 1px solid var(--bd);
+      color: var(--muted);
+      flex-shrink: 0;
+      white-space: nowrap
+    }
+
+    .card-curso-sub {
+      font-size: 11px;
       font-weight: 500;
-      color: white;
+      color: var(--faint);
+      margin-bottom: 4px;
+      font-style: italic
     }
 
-    .badge.tipo {
-      font-size: 0.7rem;
+    .card-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--txt);
+      line-height: 1.45;
+      margin-bottom: 4px;
+      letter-spacing: -.1px
     }
 
-    .badge.dia {
-      background: #95a5a6;
+    .card-nome {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.4;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden
     }
 
-    .badge.publico {
-      background: #f39c12;
+    .card-bot {
+      padding: 8px 14px 10px;
+      background: var(--surf2);
+      border-top: 1px solid var(--bd);
+      display: flex;
+      flex-direction: column;
+      gap: 6px
     }
 
-    .badge.vagas {
-      background: #27ae60;
+    .card-loc {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 4px;
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      align-self: flex-start
     }
 
-    .badge.horario {
-      background: #3498db;
-      font-size: 0.7rem;
+    .card-loc svg {
+      flex-shrink: 0;
+      opacity: .7
     }
 
-    .curso {
-      color: #7f8c8d;
-      font-size: 0.9rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .card h3 {
-      font-size: 1.25rem;
-      margin-bottom: 1rem;
-      color: #2c3e50;
-    }
-
-    .local {
+    .card-footer {
       display: flex;
       align-items: center;
-      gap: 0.5rem;
-      margin-bottom: 1rem;
-      color: #555;
-    }
-
-    .local-dot {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-    }
-
-    .info-badges {
-      display: flex;
-      gap: 0.5rem;
-      flex-wrap: wrap;
-    }
-
-    .details-panel {
-      position: fixed;
-      top: 0;
-      right: -400px;
-      width: 400px;
-      height: 100vh;
-      background: white;
-      box-shadow: -5px 0 20px rgba(0, 0, 0, 0.2);
-      transition: right 0.3s;
-      z-index: 1000;
-      padding: 2rem;
-      overflow-y: auto;
-    }
-
-    .details-panel.show {
-      right: 0;
-    }
-
-    .details-header {
-      display: flex;
       justify-content: space-between;
-      align-items: center;
-      margin-bottom: 1.5rem;
+      gap: 6px
     }
 
-    .close-btn {
+    .card-pub {
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: .4px
+    }
+
+    .card-info {
+      display: flex;
+      align-items: center;
+      gap: 10px
+    }
+
+    .card-vagas {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--muted)
+    }
+
+    .card-hor {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      font-size: 11px;
+      color: var(--faint)
+    }
+
+    /* ── DETAIL PANEL ── */
+    #det-bar {
+      display: none;
+      background: var(--surf);
+      border: 1.5px solid var(--green);
+      border-radius: var(--r);
+      padding: 12px 16px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+      gap: 16px;
+      align-items: center;
+      box-shadow: 0 0 0 4px var(--green-l)
+    }
+
+    .det-it {
+      display: flex;
+      flex-direction: column;
+      gap: 2px
+    }
+
+    .det-k {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .8px;
+      color: var(--green);
+      opacity: .7
+    }
+
+    .det-v {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--txt)
+    }
+
+    .det-cls {
+      margin-left: auto;
       background: none;
       border: none;
-      font-size: 1.5rem;
       cursor: pointer;
-      color: #999;
+      font-size: 20px;
+      color: var(--muted);
+      line-height: 1;
+      align-self: center;
+      padding: 0 4px;
+      font-family: sans-serif;
+      transition: color .1s
     }
 
-    .details-content dt {
-      font-weight: 500;
-      color: #555;
-      margin-top: 1rem;
+    .det-cls:hover {
+      color: var(--txt)
     }
 
-    .details-content dd {
-      margin-bottom: 1rem;
+    /* ── EMPTY ── */
+    .empty-state {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 64px 24px;
+      text-align: center;
+      width: 100%
     }
 
-    .backdrop {
+    .empty-icon {
+      font-size: 40px;
+      margin-bottom: 12px;
+      opacity: .5
+    }
+
+    .empty-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--muted);
+      margin-bottom: 4px
+    }
+
+    .empty-sub {
+      font-size: 13px;
+      color: var(--faint)
+    }
+
+    .empty-clear {
+      margin-top: 14px;
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 8px 18px;
+      border-radius: var(--rs);
+      border: 1.5px solid var(--bd2);
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all .15s
+    }
+
+    .empty-clear:hover {
+      border-color: var(--green);
+      color: var(--green);
+      background: var(--green-l)
+    }
+
+    /* ── TOAST ── */
+    #toast {
       position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.5);
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%) translateY(60px);
+      background: var(--txt);
+      color: #fff;
+      padding: 9px 20px;
+      border-radius: var(--rs);
+      font-size: 13px;
+      font-weight: 600;
       opacity: 0;
-      visibility: hidden;
-      transition: all 0.3s;
+      transition: opacity .25s, transform .25s;
       z-index: 999;
+      white-space: nowrap;
+      pointer-events: none;
+      box-shadow: var(--sh)
     }
 
-    .backdrop.show {
+    #toast.show {
       opacity: 1;
-      visibility: visible;
+      transform: translateX(-50%) translateY(0)
     }
 
-    @media (max-width: 768px) {
-      .header {
-        flex-direction: column;
-        text-align: center;
-      }
+    /* ── SCROLLBAR ── */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px
+    }
 
-      .stats {
-        grid-template-columns: 1fr;
-      }
+    ::-webkit-scrollbar-track {
+      background: transparent
+    }
 
-      .filters {
-        flex-direction: column;
-      }
+    ::-webkit-scrollbar-thumb {
+      background: var(--bd2);
+      border-radius: 3px
+    }
 
-      .filters input,
-      .filters select {
-        min-width: auto;
-      }
+    /* ── RESPONSIVE ── */
+    @media(max-width:1024px) {
 
-      .grid {
-        grid-template-columns: 1fr;
-      }
-
-      .details-panel {
-        width: 100vw;
-        right: -100vw;
-      }
-
-      .details-panel.show {
-        right: 0;
+      .hdr-inner,
+      #cal-wrap,
+      #fbar,
+      #main {
+        padding-left: 20px;
+        padding-right: 20px
       }
     }
 
-    @media (max-width: 480px) {
-      .calendar-strip {
-        flex-wrap: wrap;
+    @media(max-width:768px) {
+      .hdr-inner {
+        padding: 10px 16px;
+        gap: 10px
+      }
+
+      #cal-wrap {
+        padding: 10px 16px 12px
+      }
+
+      #fbar {
+        padding: 8px 16px 10px;
+        gap: 7px
+      }
+
+      #active-bar {
+        padding: 8px 16px
+      }
+
+      #main {
+        padding: 16px 16px 40px
+      }
+
+      .brand-ttl {
+        font-size: 14px
+      }
+
+      .srch {
+        width: 150px
+      }
+
+      .hdr-stats {
+        display: none
+      }
+
+      .brand-divider {
+        display: none
+      }
+
+      .card-grid {
+        grid-template-columns: 1fr
+      }
+    }
+
+    @media(max-width:480px) {
+      .card-grid {
+        grid-template-columns: 1fr
+      }
+
+      #fbar .fsep {
+        display: none
       }
     }
   </style>
 </head>
 
 <body>
-  <header class="header">
-    <a href="https://uniceplac.edu.br" target="_blank">
-      <img class="logo" src="../semana_academica/assets/Horizontal-Letra-Branca.png" alt="UNICEPLAC" />
-    </a>
-    <h1 class="title">Semana Acadêmica Integrada 2026</h1>
-    <div class="stats">
-      <div class="stat"><strong id="total-ativ">0</strong><br>Atividades</div>
-      <div class="stat"><strong id="total-vagas">0</strong><br>Vagas</div>
-      <div class="stat"><strong id="num-cursos">0</strong><br>Cursos</div>
+  <div id="toast"></div>
+
+  <!-- HEADER -->
+  <header id="hdr">
+    <div class="hdr-inner">
+      <div class="brand">
+        <img class="brand-logo"
+          src="data:image/webp;base64,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"
+          alt="UNICEPLAC">
+        <div class="brand-divider"></div>
+        <div class="brand-text">
+          <div class="brand-lbl">Programação</div>
+          <div class="brand-ttl">Semana Acadêmica Integrada 2026</div>
+        </div>
+      </div>
+      <div class="hdr-stats" id="stats"></div>
     </div>
   </header>
 
-  <div class="calendar-strip" id="calendar">
-    <!-- Populated by JS -->
+  <!-- CALENDAR -->
+  <div id="cal-wrap">
+    <div class="cal-header">
+      <div class="cal-title">Maio de 2026</div>
+      <div class="cal-hint">Toque em um dia para filtrar</div>
+    </div>
+    <div id="cal"></div>
   </div>
 
-  <div class="filters">
-    <input type="text" id="search" placeholder="Buscar por nome, curso ou local...">
-    <select id="curso-filter">
-      <option value="all">Todos os Cursos</option>
-      <!-- Populated -->
+  <!-- FILTER BAR -->
+  <div id="fbar">
+    <div class="srch-wrap">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true" style="color:var(--faint)">
+        <circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.5" />
+        <path d="M11 11l3.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+      </svg>
+      <input class="srch" id="srch" type="text" placeholder="Buscar atividade, local...">
+    </div>
+
+    <div class="fsep"></div>
+    <span class="flbl">Curso</span>
+    <select class="curso-select" id="curso-sel" onchange="setCurso(this.value)">
+      <option value="all">Todos os cursos</option>
     </select>
-    <div class="filter-group">
-      <button class="pub-btn" data-pub="Integrada">Integrada</button>
-      <button class="pub-btn" data-pub="Curso">Curso</button>
-      <button class="pub-btn" data-pub="Aberto ao Público">Aberto ao Público</button>
-    </div>
-    <div class="filter-group">
-      <button class="chip" data-time="Matutino">Matutino</button>
-      <button class="chip" data-time="Tarde">Tarde</button>
-      <button class="chip" data-time="Noturno">Noturno</button>
-    </div>
-    <select id="group-select">
-      <option value="none">Sem agrupamento</option>
-      <option value="dia">Por Dia</option>
-      <option value="curso">Por Curso</option>
-      <option value="local">Por Local</option>
-      <option value="publico">Por Público</option>
-    </select>
-    <button class="btn-clear" id="clear-filters">Limpar Filtros</button>
+
+    <div class="fsep"></div>
+    <span class="flbl">Público</span>
+    <div class="frow" id="pub-chips"></div>
+
+    <div class="fsep"></div>
+    <span class="flbl">Horário</span>
+    <div class="frow" id="hor-chips"></div>
+
+    <div class="fsep"></div>
+    <span class="flbl">Agrupar</span>
+    <div class="frow" id="grp-btns"></div>
+
+    <div class="fsep"></div>
+    <button class="clearbtn hidden" id="clear-btn" onclick="clearAll()">
+      <svg width="10" height="10" viewBox="0 0 12 12" fill="none">
+        <path d="M1 1l10 10M11 1L1 11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+      </svg>
+      Limpar filtros
+    </button>
   </div>
 
-  <div class="active-filters" id="active-filters"></div>
+  <!-- ACTIVE FILTER TAGS -->
+  <div id="active-bar"></div>
 
-  <div class="activities">
-    <div id="activities-grid" class="grid"></div>
-  </div>
-
-  <div class="backdrop" id="backdrop" onclick="closeDetails()"></div>
-  <div class="details-panel" id="details-panel">
-    <div class="details-header">
-      <h2>Detalhes da Atividade</h2>
-      <button class="close-btn" onclick="closeDetails()">×</button>
-    </div>
-    <dl class="details-content" id="details-content"></dl>
-  </div>
+  <!-- MAIN -->
+  <main id="main">
+    <div id="det-bar"></div>
+    <div id="content"></div>
+  </main>
 
   <script>
-    // Data generation
-    const courses = ['Administração', 'Direito', 'Enfermagem', 'Engenharia Civil', 'Pedagogia', 'Contabilidade', 'Medicina Veterinária', 'Arquitetura', 'Psicologia', 'Engenharia de Produção'];
-    const tipos = ['Palestra', 'Workshop', 'Mesa Redonda', 'Minicurso', 'Painel', 'Apresentação', 'Debate'];
-    const locais = ['Auditório Principal', 'Auditório Secundário', 'Sala 101', 'Sala 102', 'Sala 103', 'Laboratório 1', 'Laboratório 2', 'Pátio Central', 'Sala de Conferências'];
-    const publicos = ['Integrada', 'Curso', 'Aberto ao Público'];
-    const horarios = ['08:00 - 10:00', '10:30 - 12:00', '14:00 - 16:00', '16:30 - 18:00', '19:00 - 21:00'];
-    const tipoColors = {
-      'Palestra': '#FF4757',
-      'Workshop': '#1E90FF',
-      'Mesa Redonda': '#FFA502',
-      'Minicurso': '#2ED573',
-      'Painel': '#FF9FF3',
-      'Apresentação': '#00D2D3',
-      'Debate': '#FF6348'
-    };
-    const localColors = {
-      'Auditório Principal': '#FF6B35',
-      'Auditório Secundário': '#F7931E',
-      'Sala 101': '#00A8CC',
-      'Sala 102': '#00B894',
-      'Sala 103': '#6C5CE7',
-      'Laboratório 1': '#A29BFE',
-      'Laboratório 2': '#FD79A8',
-      'Pátio Central': '#00B894',
-      'Sala de Conferências': '#E17055'
-    };
+    // ═══════════════════════════════
+    //  DATA
+    // ═══════════════════════════════
+    let ITEMS = [
+      { "id": 0, "curso": "Ed. Física", "tipo": "Encerramento", "nome": "Palestra de Encerramento (Tema a definir)", "local": "SALA DE AULA", "publico": "Curso", "vagas": "80", "horario": "", "data": "30 de maio de 2026", "dia": "30/05" },
+      { "id": 1, "curso": "Biomedicina/Farmácia", "tipo": "Palestra - Saúde", "nome": "A Ciência por trás da vida", "local": "AUDITÓRIO VERDE", "publico": "Integrada", "vagas": "500", "horario": "Noturno", "data": "25 de maio de 2026", "dia": "25/05" },
+      { "id": 2, "curso": "Biomedicina/Farmácia", "tipo": "Palestra - Saúde", "nome": "Inovação e Ciência na Promoção da Saúde Humana", "local": "SALA DE AULA", "publico": "Integrada", "vagas": "80", "horario": "Noturno", "data": "25 de maio de 2026", "dia": "25/05" },
+      { "id": 3, "curso": "Biomedicina/Farmácia", "tipo": "Minicurso - Práticas clínicas", "nome": "Biomarcadores e saúde: entendendo o corpo na prática", "local": "SALA DE AULA", "publico": "Integrada", "vagas": "50", "horario": "", "data": "30 de maio de 2026", "dia": "30/05" },
+      { "id": 4, "curso": "Odonto", "tipo": "Ciclo de Palestras", "nome": "Palestras com Especialistas Externos", "local": "AUDITÓRIO VERMELHO", "publico": "Curso", "vagas": "250", "horario": "Matutino", "data": "25 de maio de 2026", "dia": "25/05" },
+      { "id": 5, "curso": "Adm/Mkt", "tipo": "Palestra - Negócios", "nome": "Gestão de Negócios na Era da Competitividade", "local": "SALA DE AULA", "publico": "Integrada", "vagas": "120", "horario": "Noturno", "data": "26 de maio de 2026", "dia": "26/05" },
+      { "id": 6, "curso": "Ed. Física", "tipo": "Mesa Redonda - Externos", "nome": "Debate Temático com Convidados", "local": "AUDITÓRIO VERMELHO", "publico": "Integrada", "vagas": "120", "horario": "", "data": "30 de maio de 2026", "dia": "30/05" },
+      { "id": 7, "curso": "Biomedicina/Farmácia", "tipo": "Minicurso - Práticas clínicas", "nome": "Primeiros Socorros", "local": "SALA DE AULA", "publico": "Integrada", "vagas": "50", "horario": "", "data": "30 de maio de 2026", "dia": "30/05" },
+      { "id": 8, "curso": "Ed. Física", "tipo": "Ciclo de Oficinas", "nome": "Oficinas Práticas", "local": "SALA DE AULA", "publico": "Aberto ao Público", "vagas": "80", "horario": "", "data": "30 de maio de 2026", "dia": "30/05" },
+      { "id": 9, "curso": "Psicologia", "tipo": "Palestra", "nome": "Palestra de Interesse Geral", "local": "AUDITÓRIO VERMELHO", "publico": "Integrada", "vagas": "250", "horario": "Noturno", "data": "27 de maio de 2026", "dia": "27/05" },
+      { "id": 10, "curso": "Nutrição", "tipo": "Palestra - Saúde", "nome": "Comer além dos nutrientes", "local": "SALA DE AULA", "publico": "Integrada", "vagas": "60", "horario": "Noturno", "data": "25 de maio de 2026", "dia": "25/05" },
+      { "id": 11, "curso": "Enfermagem", "tipo": "Oficina - Saúde", "nome": "Atividade Prática de Simulação Realística", "local": "LABORATÓRIO", "publico": "Curso", "vagas": "40", "horario": "Matutino", "data": "29 de maio de 2026", "dia": "29/05" },
+      { "id": 12, "curso": "Veterinária", "tipo": "Palestra", "nome": "Terapia Assistida por Animais", "local": "SALA DE AULA", "publico": "Integrada", "vagas": "120", "horario": "Matutino", "data": "27 de maio de 2026", "dia": "27/05" },
+      { "id": 13, "curso": "Odonto", "tipo": "Palestra - Estética", "nome": "Palestras interdisciplinares", "local": "SALA DE AULA", "publico": "Integrada", "vagas": "120", "horario": "Noturno", "data": "25 de maio de 2026", "dia": "25/05" },
+      { "id": 14, "curso": "Biomedicina/Farmácia", "tipo": "Minicurso - Estética", "nome": "O futuro da estética: Princípios da Regeneração Tecidual", "local": "SALA DE AULA", "publico": "Integrada", "vagas": "50", "horario": "Noturno", "data": "26 de maio de 2026", "dia": "26/05" },
+      { "id": 15, "curso": "Arquit./Eng. Civil", "tipo": "Minicurso", "nome": "BIM do zero à interoperabilidade", "local": "LABORATÓRIO", "publico": "Curso", "vagas": "60", "horario": "Noturno", "data": "25 de maio de 2026", "dia": "25/05" },
+      { "id": 16, "curso": "Arquit./Eng. Civil", "tipo": "Oficina", "nome": "Maquete em 90 minutos", "local": "SALA DE AULA", "publico": "Curso", "vagas": "50", "horario": "Noturno", "data": "26 de maio de 2026", "dia": "26/05" },
+      { "id": 17, "curso": "Tecnologias", "tipo": "Palestra - Negócios", "nome": "Palestra SEBRAE: Design Thinking para Inovação", "local": "AUDITÓRIO VERDE", "publico": "Integrada", "vagas": "500", "horario": "Noturno", "data": "27 de maio de 2026", "dia": "27/05" },
+      { "id": 18, "curso": "Pedagogia", "tipo": "Minicurso - Educação", "nome": "Brincadeiras e Jogos Pedagógicos na Prática", "local": "", "publico": "Integrada", "vagas": "60", "horario": "", "data": "29 de maio de 2026", "dia": "29/05" },
+      { "id": 19, "curso": "Tecnologias", "tipo": "Gamificação", "nome": "Hackathon (Formação de Equipes)", "local": "AUDITÓRIO VERMELHO", "publico": "Curso", "vagas": "250", "horario": "Matutino", "data": "26 de maio de 2026", "dia": "26/05" },
+      { "id": 20, "curso": "Veterinária", "tipo": "Palestra - Tecnologia/IA", "nome": "Uso das tecnologias digitais nas ciências da saúde", "local": "AUDITÓRIO VERMELHO", "publico": "Integrada", "vagas": "250", "horario": "Matutino", "data": "27 de maio de 2026", "dia": "27/05" },
+      { "id": 21, "curso": "Radiologia", "tipo": "Palestra", "nome": "Palestra com Convidados Externos", "local": "SALA DE AULA", "publico": "Curso", "vagas": "120", "horario": "Noturno", "data": "27 de maio de 2026", "dia": "27/05" },
+      { "id": 22, "curso": "Fisioterapia", "tipo": "Ciclo de Oficinas", "nome": "Oficinas Temáticas", "local": "SALA DE AULA", "publico": "Curso", "vagas": "80", "horario": "Noturno", "data": "27 de maio de 2026", "dia": "27/05" },
+      { "id": 23, "curso": "Psicologia", "tipo": "Minicurso", "nome": "Temática Específica em Psicologia", "local": "SALA DE AULA", "publico": "Curso", "vagas": "50", "horario": "Matutino", "data": "26 de maio de 2026", "dia": "26/05" },
+      { "id": 24, "curso": "Biomedicina/Farmácia", "tipo": "Minicurso - Práticas clínicas", "nome": "Interpretação de exames e metabolismo na prática clínica", "local": "SALA DE AULA", "publico": "Integrada", "vagas": "50", "horario": "Noturno", "data": "26 de maio de 2026", "dia": "26/05" },
+      { "id": 25, "curso": "Ed. Física", "tipo": "Minicurso - Práticas clínicas", "nome": "Tema a definir. Ex. Treinamento de força no controle autonômico cardíaco", "local": "SALA DE AULA", "publico": "Curso", "vagas": "?", "horario": "Noturno", "data": "25 de maio de 2026", "dia": "25/05" },
+      { "id": 26, "curso": "Tecnologias", "tipo": "Gamificação", "nome": "Atividade Codeplac: Bingo Personalizado", "local": "AUDITÓRIO VERMELHO", "publico": "Curso", "vagas": "250", "horario": "Tarde", "data": "27 de maio de 2026", "dia": "27/05" },
+      { "id": 27, "curso": "Odonto", "tipo": "Exposição Poster", "nome": "Apresentação de Banner Científico", "local": "BIBLIOTECA", "publico": "Aberto ao Público", "vagas": "200", "horario": "Matutino e Noturno", "data": "29 de maio de 2026", "dia": "29/05" },
+      { "id": 28, "curso": "Odonto", "tipo": "Mesa Redonda - Externos", "nome": "Ex. Residência e Concursos / Egressos?", "local": "SALA DE AULA", "publico": "Integrada", "vagas": "120", "horario": "Matutino", "data": "25 de maio de 2026", "dia": "25/05" },
+      { "id": 29, "curso": "Pedagogia", "tipo": "Oficina", "nome": "Gamificação na Educação", "local": "LABORATÓRIO DE INFORMÁTICA", "publico": "Integrada", "vagas": "60", "horario": "Noturno", "data": "26 de maio de 2026", "dia": "26/05" },
+      { "id": 30, "curso": "Adm/Mkt", "tipo": "Palestra - Tecnologia/IA", "nome": "Inteligência Artificial Aplicada à Gestão de Negócios", "local": "SALA DE AULA", "publico": "Integrada", "vagas": "120", "horario": "Noturno", "data": "25 de maio de 2026", "dia": "25/05" },
+      { "id": 31, "curso": "Psicologia", "tipo": "Palestra", "nome": "Palestra de Interesse Geral", "local": "SALA DE AULA", "publico": "Integrada", "vagas": "", "horario": "Matutino e Noturno", "data": "28 de maio de 2026", "dia": "28/05" },
+      { "id": 32, "curso": "Estética", "tipo": "Palestra - Estética", "nome": "Tendências e Práticas em Estética Facial", "local": "AUDITÓRIO VERMELHO", "publico": "Integrada", "vagas": "250", "horario": "Noturno", "data": "26 de maio de 2026", "dia": "26/05" },
+      { "id": 33, "curso": "Nutrição", "tipo": "Palestra - Saúde", "nome": "Suplementos ergogênicos: entre o marketing e a ciência", "local": "SALA DE AULA", "publico": "Integrada", "vagas": "50", "horario": "Noturno", "data": "26 de maio de 2026", "dia": "26/05" },
+      { "id": 34, "curso": "Pedagogia", "tipo": "Minicurso - Educação", "nome": "Técnicas de Redação", "local": "SALA DE AULA", "publico": "Integrada", "vagas": "80", "horario": "Noturno", "data": "28 de maio de 2026", "dia": "28/05" },
+      { "id": 35, "curso": "Enfermagem", "tipo": "Encerramento", "nome": "Palestra Motivacional de Encerramento", "local": "AUDITÓRIO VERMELHO", "publico": "Curso", "vagas": "250", "horario": "Matutino", "data": "29 de maio de 2026", "dia": "29/05" },
+      { "id": 36, "curso": "Fisioterapia", "tipo": "Exposição Poster", "nome": "Exposição dos Melhores Trabalhos de TCC", "local": "BIBLIOTECA", "publico": "Aberto ao Público", "vagas": "200", "horario": "Matutino e Noturno", "data": "28 de maio de 2026", "dia": "28/05" },
+      { "id": 37, "curso": "Veterinária", "tipo": "Palestra", "nome": "Programa de Microchipagem e Posse Responsável", "local": "SALA DE AULA", "publico": "Integrada", "vagas": "120", "horario": "Noturno", "data": "27 de maio de 2026", "dia": "27/05" },
+      { "id": 38, "curso": "Arquit./Eng. Civil", "tipo": "Gamificação", "nome": "Pontes de Macarrão", "local": "ESPAÇO COMPARTILHAR", "publico": "Aberto ao Público", "vagas": "100", "horario": "Noturno", "data": "28 de maio de 2026", "dia": "28/05" },
+      { "id": 39, "curso": "Estética", "tipo": "Palestra - Estética", "nome": "Técnicas e Inovações na Estética Corporal", "local": "AUDITÓRIO VERMELHO", "publico": "Integrada", "vagas": "250", "horario": "Noturno", "data": "26 de maio de 2026", "dia": "26/05" },
+      { "id": 40, "curso": "Arquit./Eng. Civil", "tipo": "Palestra", "nome": "Mobilidade, acessibilidade e direito à cidade", "local": "AUDITÓRIO VERDE", "publico": "Integrada", "vagas": "500", "horario": "Noturno", "data": "27 de maio de 2026", "dia": "27/05" },
+      { "id": 41, "curso": "Tecnologias", "tipo": "Exposição Poster", "nome": "Atividade Codeplac: Apresentação de Banners (Prof. Sebastião)", "local": "HALL DO AUDITÓRIOS", "publico": "Aberto ao Público", "vagas": "40", "horario": "Matutino e Noturno", "data": "27 de maio de 2026", "dia": "27/05" },
+      { "id": 42, "curso": "Odonto", "tipo": "Minicurso", "nome": "Teoria e Demonstrativa. Ex. L-PRF", "local": "SALA DE AULA", "publico": "Curso", "vagas": "60", "horario": "Matutino", "data": "28 de maio de 2026", "dia": "28/05" },
+      { "id": 43, "curso": "Direito", "tipo": "Palestra - Tecnologia/IA", "nome": "Inteligência Artificial e o Futuro do Direito", "local": "AUDITÓRIO VERMELHO", "publico": "Curso", "vagas": "250", "horario": "Matutino", "data": "28 de maio de 2026", "dia": "28/05" },
+      { "id": 44, "curso": "Tecnologias", "tipo": "Palestra - Tecnologia/IA", "nome": "Palestra com a G4F (Primeira Parte)", "local": "AUDITÓRIO VERMELHO", "publico": "Integrada", "vagas": "250", "horario": "Noturno", "data": "28 de maio de 2026", "dia": "28/05" },
+      { "id": 45, "curso": "Tecnologias", "tipo": "Gamificação", "nome": "Hackathon: Encerramento e Apresentação de Projetos", "local": "LABORATÓRIOS DE INFORMÁTICA", "publico": "Curso", "vagas": "60", "horario": "Tarde", "data": "29 de maio de 2026", "dia": "29/05" },
+      { "id": 46, "curso": "Integrada", "tipo": "Cultural", "nome": "Monólogo Antonieta de Barros", "local": "ESPAÇO COMPARTILHAR", "publico": "Aberto ao Público", "vagas": "100", "horario": "Matutino e Noturno", "data": "25 de maio de 2026", "dia": "25/05" },
+      { "id": 47, "curso": "Tecnologias", "tipo": "Palestra - Tecnologia/IA", "nome": "Atividade Codeplac: Palestra com Geovanne sobre 'Guardião Cibernético'", "local": "AUDITÓRIO VERMELHO", "publico": "Integrada", "vagas": "250", "horario": "Matutino", "data": "27 de maio de 2026", "dia": "27/05" },
+      { "id": 48, "curso": "Enfermagem", "tipo": "Oficina", "nome": "", "local": "AUDITÓRIO VERMELHO", "publico": "Integrada", "vagas": "250", "horario": "Noturno", "data": "", "dia": "" },
+      { "id": 49, "curso": "Nutrição", "tipo": "Oficina - Saúde", "nome": "Aproveitamento Integral de Alimentos", "local": "SALA DE AULA", "publico": "Integrada", "vagas": "30", "horario": "Noturno", "data": "25 de maio de 2026", "dia": "25/05" },
+      { "id": 50, "curso": "Arquit./Eng. Civil", "tipo": "Minicurso", "nome": "Conforto térmico e iluminação natural", "local": "SALA DE AULA", "publico": "Curso", "vagas": "50", "horario": "Noturno", "data": "26 de maio de 2026", "dia": "26/05" },
+      { "id": 51, "curso": "Nutrição", "tipo": "Oficina - Saúde", "nome": "Receitas Fit: Elaboração e Técnica Dietética", "local": "DIETÉTICA", "publico": "Integrada", "vagas": "30", "horario": "Noturno", "data": "28 de maio de 2026", "dia": "28/05" },
+      { "id": 52, "curso": "Veterinária", "tipo": "Ciclo de Palestras", "nome": "Acidente com animais peçonhentos e saúde pública; Resistência antimicrobiana", "local": "AUDITÓRIO VERDE", "publico": "Integrada", "vagas": "500", "horario": "Noturno", "data": "29 de maio de 2026", "dia": "29/05" },
+      { "id": 53, "curso": "Direito", "tipo": "Mesa Redonda - Externos", "nome": "Participação da Comissão da Igualdade Racial da OAB Gama/DF", "local": "AUDITÓRIO VERDE", "publico": "Integrada", "vagas": "500", "horario": "Matutino", "data": "27 de maio de 2026", "dia": "27/05" },
+      { "id": 54, "curso": "Tecnologias", "tipo": "Gamificação", "nome": "Atividade Codeplac: Competição Codeplac nos Laboratórios", "local": "LABORATÓRIOS DE INFORMÁTICA", "publico": "Curso", "vagas": "60", "horario": "Matutino", "data": "26 de maio de 2026", "dia": "26/05" },
+      { "id": 55, "curso": "Arquit./Eng. Civil", "tipo": "Minicurso", "nome": "QGIS aplicado à leitura urbana", "local": "LABORATÓRIO", "publico": "Curso", "vagas": "60", "horario": "Noturno", "data": "28 de maio de 2026", "dia": "28/05" },
+      { "id": 56, "curso": "Biomedicina/Farmácia", "tipo": "Minicurso - Práticas clínicas", "nome": "Decifrando medicamentos: da farmacologia à prática", "local": "SALA DE AULA", "publico": "Integrada", "vagas": "50", "horario": "", "data": "30 de maio de 2026", "dia": "30/05" },
+      { "id": 57, "curso": "Tecnologias", "tipo": "Palestra - Neg�cios", "nome": "", "local": "AUDITÓRIO VERDE", "publico": "Integrada", "vagas": "500", "horario": "Matutino", "data": "", "dia": "" },
+      { "id": 58, "curso": "Nutrição", "tipo": "Palestra - Saúde", "nome": "Da recusa alimentar ao risco nutricional", "local": "SALA DE AULA", "publico": "Curso", "vagas": "50", "horario": "Noturno", "data": "27 de maio de 2026", "dia": "27/05" },
+      { "id": 59, "curso": "Biomedicina/Farmácia", "tipo": "Minicurso - Práticas clínicas", "nome": "Prescrição farmacêutica na prática: protocolos e condutas", "local": "SALA DE AULA", "publico": "Curso", "vagas": "50", "horario": "Noturno", "data": "26 de maio de 2026", "dia": "26/05" },
+      { "id": 60, "curso": "Integrada", "tipo": "Cultural", "nome": "Roda de Capoeira", "local": "ESPAÇO COMPARTILHAR", "publico": "Aberto ao Público", "vagas": "100", "horario": "Matutino e Noturno", "data": "29 de maio de 2026", "dia": "29/05" },
+      { "id": 61, "curso": "Tecnologias", "tipo": "Palestra - Tecnologia/IA", "nome": "Palestra SEBRAE: Sucesso na Era da Inteligência Artificial", "local": "AUDITÓRIO VERMELHO", "publico": "Integrada", "vagas": "250", "horario": "Matutino", "data": "27 de maio de 2026", "dia": "27/05" },
+      { "id": 62, "curso": "Arquit./Eng. Civil", "tipo": "Palestra - Tecnologia/IA", "nome": "IA, openBIM e o novo perfil profissional", "local": "SALA DE AULA", "publico": "Curso", "vagas": "80", "horario": "Noturno", "data": "25 de maio de 2026", "dia": "25/05" },
+      { "id": 63, "curso": "Tecnologias", "tipo": "Exposição Poster", "nome": "Atividade Codeplac: Apresentação de Banners (Prof. Rômulo)", "local": "HALL DO AUDITÓRIOS", "publico": "Aberto ao Público", "vagas": "40", "horario": "Matutino e Noturno", "data": "29 de maio de 2026", "dia": "29/05" },
+      { "id": 64, "curso": "Pedagogia", "tipo": "Oficina", "nome": "Gamificação na Educação", "local": "LABORATÓRIO DE INFORMÁTICA", "publico": "Integrada", "vagas": "60", "horario": "Noturno", "data": "27 de maio de 2026", "dia": "27/05" },
+      { "id": 65, "curso": "Pedagogia", "tipo": "Oficina", "nome": "A arte de desenvolver atividades manuais (boneca abayomi e colcha de retalhos)", "local": "SALA DE AULA", "publico": "Integrada", "vagas": "60", "horario": "Noturno", "data": "27 de maio de 2026", "dia": "27/05" },
+      { "id": 66, "curso": "Fisioterapia", "tipo": "Ciclo de Oficinas", "nome": "Oficinas Temáticas (Áreas de Interesse dos estudantes do curso)", "local": "SALA DE AULA", "publico": "Curso", "vagas": "50", "horario": "Noturno", "data": "26 de maio de 2026", "dia": "26/05" },
+      { "id": 67, "curso": "Pedagogia", "tipo": "Oficina", "nome": "A arte de desenvolver atividades manuais (boneca abayomi e colcha de retalhos)", "local": "SALA DE AULA", "publico": "Integrada", "vagas": "60", "horario": "Noturno", "data": "26 de maio de 2026", "dia": "26/05" },
+      { "id": 68, "curso": "Nutrição", "tipo": "Oficina - Saúde", "nome": "Avaliação Nutricional na Prática", "local": "SALA DE AULA", "publico": "Curso", "vagas": "50", "horario": "Noturno", "data": "26 de maio de 2026", "dia": "26/05" },
+      { "id": 69, "curso": "Odonto", "tipo": "Oficina", "nome": "Prática com especialistas da área", "local": "SALA DE AULA", "publico": "Curso", "vagas": "A definir", "horario": "Matutino", "data": "27 de maio de 2026", "dia": "27/05" },
+      { "id": 70, "curso": "Veterinária", "tipo": "Palestra", "nome": "Medicina Integrativa na Medicina Veterinária", "local": "AUDITÓRIO VERDE", "publico": "Curso", "vagas": "500", "horario": "Noturno", "data": "25 de maio de 2026", "dia": "25/05" },
+      { "id": 71, "curso": "Psicologia", "tipo": "Minicurso", "nome": "Temática Específica em Psicologia", "local": "SALA DE AULA", "publico": "Curso", "vagas": "50", "horario": "Matutino", "data": "25 de maio de 2026", "dia": "25/05" },
+      { "id": 72, "curso": "Arquit./Eng. Civil", "tipo": "Mostra Permanente", "nome": "Exposição - Mostra Permanente", "local": "CORREDOR BIBLIOTECA BLOCO E/F", "publico": "Aberto ao Público", "vagas": "100", "horario": "Noturno", "data": "26 de maio de 2026", "dia": "26/05" },
+      { "id": 73, "curso": "Estética", "tipo": "Estandes de patrocinadores", "nome": "Visitação aos estandes e sorteio de brindes das empresas.", "local": "HALL DO AUDITÓRIOS", "publico": "Aberto ao Público", "vagas": "Aberto", "horario": "Noturno", "data": "26 de maio de 2026", "dia": "26/05" },
+      { "id": 74, "curso": "Tecnologias", "tipo": "Palestra - Tecnologia/IA", "nome": "Palestra com a G4F (Segunda Parte)", "local": "AUDITÓRIO VERMELHO", "publico": "Integrada", "vagas": "250", "horario": "Noturno", "data": "28 de maio de 2026", "dia": "28/05" },
+      { "id": 75, "curso": "Radiologia", "tipo": "Ciclo de Palestras", "nome": "02 Palestras com Especialistas Externos", "local": "SALA DE AULA", "publico": "Curso", "vagas": "120", "horario": "Noturno", "data": "26 de maio de 2026", "dia": "26/05" },
+      { "id": 76, "curso": "Biomedicina/Farmácia", "tipo": "Minicurso - Práticas clínicas", "nome": "Peptídeos antioxidantes e fatores de crescimento", "local": "SALA DE AULA", "publico": "Integrada", "vagas": "50", "horario": "Noturno", "data": "26 de maio de 2026", "dia": "26/05" },
+      { "id": 77, "curso": "Arquit./Eng. Civil", "tipo": "Palestra", "nome": "Descarbonização da construção", "local": "SALA DE AULA", "publico": "Curso", "vagas": "120", "horario": "Noturno", "data": "26 de maio de 2026", "dia": "26/05" },
+      { "id": 78, "curso": "Arquit./Eng. Civil", "tipo": "Oficina", "nome": "Collage Lab: criando atmosferas", "local": "SALA DE AULA", "publico": "Curso", "vagas": "80", "horario": "Noturno", "data": "25 de maio de 2026", "dia": "25/05" },
+      { "id": 79, "curso": "Veterinária", "tipo": "Ciclo de Palestras", "nome": "Biópsia transcirúrgica em pequenos animais; Manejo de Animais Silvestres", "local": "LABORATÓRIO", "publico": "Curso", "vagas": "60", "horario": "Matutino e Noturno", "data": "28 de maio de 2026", "dia": "28/05" },
+      { "id": 80, "curso": "Tecnologias", "tipo": "Palestra - Tecnologia/IA", "nome": "Palestra: Internet das Coisas (IoT).", "local": "AUDITÓRIO VERMELHO", "publico": "Integrada", "vagas": "250", "horario": "Noturno", "data": "29 de maio de 2026", "dia": "29/05" },
+      { "id": 81, "curso": "Psicologia", "tipo": "Cultural", "nome": "Sarau: Música, Poemas e Encenações", "local": "ESPAÇO COMPARTILHAR", "publico": "Integrada", "vagas": "Aberto", "horario": "Matutino e Noturno", "data": "27 de maio de 2026", "dia": "27/05" },
+      { "id": 82, "curso": "Veterinária", "tipo": "Palestra", "nome": "Comportamento de equinos e a condução clínica", "local": "SALA DE AULA", "publico": "Curso", "vagas": "120", "horario": "Noturno", "data": "26 de maio de 2026", "dia": "26/05" },
+      { "id": 83, "curso": "Ed. Física", "tipo": "Oficina - Saúde", "nome": "Oficina de Mobilidade ou Recreação", "local": "QUADRA", "publico": "Integrada", "vagas": "150", "horario": "Matutino", "data": "30 de maio de 2026", "dia": "30/05" }
+    ];
 
-    let activities = [];
-    let idCounter = 1;
-    for (let d = 25; d <= 30; d++) {
-      for (let h = 0; h < 14; h++) {
-        const tipoIdx = Math.floor((idCounter - 1) / 12 % tipos.length);
-        const nome = `${tipos[tipoIdx]} sobre ${courses[(idCounter - 1) % 5].toLowerCase()}`;
-        activities.push({
-          id: idCounter++,
-          curso: courses[(idCounter - 2) % courses.length],
-          tipo: tipos[tipoIdx],
-          nome: nome,
-          local: locais[(idCounter - 2) % locais.length],
-          publico: publicos[Math.floor((idCounter - 2) / 28 % publicos.length)],
-          vagas: 50 + ((idCounter - 1) % 150),
-          horario: horarios[Math.floor((idCounter - 2) / 6 % horarios.length)],
-          data: `2026-05-${d.toString().padStart(2, '0')}`,
-          dia: `${d}/05`
-        });
-      }
+    // ═══════════════════════════════
+    //  CALENDAR CONFIG
+    // ═══════════════════════════════
+    const CAL_DAYS = [
+      { dia: '25/05', dn: '25', dow: 'SEG', month: 'mai' },
+      { dia: '26/05', dn: '26', dow: 'TER', month: 'mai' },
+      { dia: '27/05', dn: '27', dow: 'QUA', month: 'mai' },
+      { dia: '28/05', dn: '28', dow: 'QUI', month: 'mai' },
+      { dia: '29/05', dn: '29', dow: 'SEX', month: 'mai' },
+      { dia: '30/05', dn: '30', dow: 'SÁB', month: 'mai' },
+    ];
+
+    // ═══════════════════════════════
+    //  TIPO COLORS
+    // ═══════════════════════════════
+    function tipoStyle(t) {
+      if (!t) return { bg: '#f3f4f6', tx: '#6b7280', brd: '#e5e7eb' };
+      const tl = t.toLowerCase();
+      if (tl.includes('palestra')) return { bg: '#eff6ff', tx: '#1d4ed8', brd: '#bfdbfe', bc: '#2563eb' };
+      if (tl.includes('minicurso')) return { bg: '#f0fdf4', tx: '#15803d', brd: '#bbf7d0', bc: '#16a34a' };
+      if (tl.includes('oficina')) return { bg: '#fff7ed', tx: '#c2410c', brd: '#fed7aa', bc: '#ea580c' };
+      if (tl.includes('gamificação')) return { bg: '#faf5ff', tx: '#7e22ce', brd: '#e9d5ff', bc: '#9333ea' };
+      if (tl.includes('cultural')) return { bg: '#fdf2f8', tx: '#be185d', brd: '#fbcfe8', bc: '#ec4899' };
+      if (tl.includes('exposição') || tl.includes('poster')) return { bg: '#f0fdfa', tx: '#0f766e', brd: '#99f6e4', bc: '#14b8a6' };
+      if (tl.includes('encerramento')) return { bg: '#fef2f2', tx: '#b91c1c', brd: '#fecaca', bc: '#dc2626' };
+      if (tl.includes('mesa redonda')) return { bg: '#eef2ff', tx: '#3730a3', brd: '#c7d2fe', bc: '#4f46e5' };
+      if (tl.includes('ciclo')) return { bg: '#ecfeff', tx: '#155e75', brd: '#a5f3fc', bc: '#0891b2' };
+      if (tl.includes('mostra')) return { bg: '#fdf8f0', tx: '#92400e', brd: '#fde68a', bc: '#d97706' };
+      if (tl.includes('estandes')) return { bg: '#fffbeb', tx: '#b45309', brd: '#fde68a', bc: '#f59e0b' };
+      return { bg: '#f3f4f6', tx: '#374151', brd: '#e5e7eb', bc: '#6b7280' };
     }
 
-    // State
-    let filterState = {
-      search: '',
-      day: 'all',
-      curso: 'all',
-      publico: [],
-      horario: [],
-      group: 'none'
-    };
-
-    // Elements
-    const elements = {
-      search: document.getElementById('search'),
-      cursoFilter: document.getElementById('curso-filter'),
-      groupSelect: document.getElementById('group-select'),
-      calendar: document.getElementById('calendar'),
-      activeFilters: document.getElementById('active-filters'),
-      grid: document.getElementById('activities-grid'),
-      totalAtiv: document.getElementById('total-ativ'),
-      totalVagas: document.getElementById('total-vagas'),
-      numCursos: document.getElementById('num-cursos'),
-      detailsPanel: document.getElementById('details-panel'),
-      detailsContent: document.getElementById('details-content'),
-      backdrop: document.getElementById('backdrop'),
-      clearFilters: document.getElementById('clear-filters')
-    };
-
-    // Init
-    function init() {
-      updateStats();
-      populateCalendar();
-      populateCursoFilter();
-      render();
-      setupEventListeners();
+    function locClr(l) {
+      if (!l) return { bg: '#f3f4f6', tx: '#6b7280' };
+      if (l.includes('AUDITÓRIO VERDE')) return { bg: '#dcfce7', tx: '#15803d' };
+      if (l.includes('AUDITÓRIO VERMELHO')) return { bg: '#fee2e2', tx: '#b91c1c' };
+      if (l.includes('SALA DE AULA')) return { bg: '#dbeafe', tx: '#1d4ed8' };
+      if (l.includes('LABORATÓRIOS DE') || l.includes('LABORATÓRIO DE')) return { bg: '#ede9fe', tx: '#6d28d9' };
+      if (l.includes('LABORATÓRIO')) return { bg: '#fef9c3', tx: '#a16207' };
+      if (l.includes('HALL')) return { bg: '#fce7f3', tx: '#be185d' };
+      if (l.includes('ESPAÇO COMPARTILHAR')) return { bg: '#ffedd5', tx: '#c2410c' };
+      if (l.includes('BIBLIOTECA') || l.includes('CORREDOR')) return { bg: '#dcfce7', tx: '#15803d' };
+      if (l.includes('QUADRA') || l.includes('DIETÉTICA')) return { bg: '#d1fae5', tx: '#065f46' };
+      return { bg: '#f1f5f9', tx: '#475569' };
     }
 
-    function updateStats() {
-      elements.totalAtiv.textContent = activities.length;
-      const totalVagas = activities.reduce((sum, a) => sum + a.vagas, 0);
-      elements.totalVagas.textContent = totalVagas.toLocaleString();
-      const uniqueCursos = new Set(activities.map(a => a.curso));
-      elements.numCursos.textContent = uniqueCursos.size;
+    function pubClr(p) {
+      if (p === 'Integrada') return { bg: '#fce7f3', tx: '#9d174d' };
+      if (p === 'Aberto ao Público') return { bg: '#fef9c3', tx: '#854d0e' };
+      return { bg: '#f1f5f9', tx: '#475569' };
     }
 
-    function populateCalendar() {
-      elements.calendar.innerHTML = '<button class="day-btn active" data-day="all">Todos</button>' +
-        [25, 26, 27, 28, 29, 30].map(d => `<button class="day-btn" data-day="${d}/05">${d}/05</button>`).join('');
+    function dotColor(local) {
+      if (local.includes('AUDITÓRIO VERDE')) return '#15803d';
+      if (local.includes('AUDITÓRIO VERMELHO')) return '#b91c1c';
+      if (local.includes('SALA DE AULA')) return '#1d4ed8';
+      if (local.includes('LABORATÓRIO')) return '#6d28d9';
+      if (local.includes('HALL')) return '#be185d';
+      if (local.includes('ESPAÇO')) return '#c2410c';
+      if (local.includes('BIBLIOTECA') || local.includes('CORREDOR')) return '#15803d';
+      return '#6b7280';
     }
 
-    function populateCursoFilter() {
-      const uniqueCursos = [...new Set(activities.map(a => a.curso))].sort();
-      elements.cursoFilter.innerHTML = '<option value="all">Todos os Cursos</option>' +
-        uniqueCursos.map(c => `<option value="${c}">${c}</option>`).join('');
+    // Truncate tipo for badge
+    function tipoLabel(t) {
+      if (!t) return '—';
+      const map = {
+        'Palestra - Saúde': 'Palestra · Saúde',
+        'Palestra - Negócios': 'Palestra · Negócios',
+        'Palestra - Tecnologia/IA': 'Palestra · IA',
+        'Palestra - Estética': 'Palestra · Estética',
+        'Minicurso - Práticas clínicas': 'Minicurso · Clínico',
+        'Minicurso - Educação': 'Minicurso · Educação',
+        'Minicurso - Estética': 'Minicurso · Estética',
+        'Ciclo de Palestras': 'Ciclo de Palestras',
+        'Mesa Redonda - Externos': 'Mesa Redonda',
+        'Ciclo de Oficinas': 'Ciclo de Oficinas',
+        'Oficina - Saúde': 'Oficina · Saúde',
+        'Exposição Poster': 'Exposição Poster',
+        'Mostra Permanente': 'Mostra Permanente',
+        'Estandes de patrocinadores': 'Estandes',
+      };
+      return map[t] || t;
     }
 
-    function getTimeSlot(horario) {
-      const startHour = parseInt(horario.split(' - ')[0].split(':')[0]);
-      if (startHour < 12) return 'Matutino';
-      if (startHour < 18) return 'Tarde';
-      return 'Noturno';
+    // ═══════════════════════════════
+    //  STATE
+    // ═══════════════════════════════
+    const S = { search: '', pub: 'all', hor: 'all', dia: 'all', curso: 'all', group: 'curso', sel: null };
+
+    function hasFilters() {
+      return S.search || S.pub !== 'all' || S.hor !== 'all' || S.dia !== 'all' || S.curso !== 'all';
     }
 
-    function applyFilters() {
-      let filtered = activities.filter(activity => {
-        if (filterState.day !== 'all' && activity.dia !== filterState.day) return false;
-        if (filterState.curso !== 'all' && activity.curso !== filterState.curso) return false;
-        if (filterState.publico.length > 0 && !filterState.publico.includes(activity.publico)) return false;
-        if (filterState.horario.length > 0) {
-          const timeSlot = getTimeSlot(activity.horario);
-          if (!filterState.horario.includes(timeSlot)) return false;
-        }
-        const searchLower = filterState.search.toLowerCase();
-        if (searchLower && !activity.nome.toLowerCase().includes(searchLower) &&
-          !activity.curso.toLowerCase().includes(searchLower) &&
-          !activity.local.toLowerCase().includes(searchLower)) return false;
+    // ═══════════════════════════════
+    //  FILTER & GROUP
+    // ═══════════════════════════════
+    function getFiltered() {
+      const q = S.search.toLowerCase();
+      return ITEMS.filter(it => {
+        if (q && ![it.curso, it.tipo, it.nome, it.local].some(v => (v || '').toLowerCase().includes(q))) return false;
+        if (S.pub !== 'all' && it.publico !== S.pub) return false;
+        if (S.hor !== 'all' && it.horario !== S.hor) return false;
+        if (S.dia !== 'all' && it.dia !== S.dia) return false;
+        if (S.curso !== 'all' && it.curso !== S.curso) return false;
         return true;
       });
-      renderGrid(filtered);
-      renderActiveFilters();
     }
 
-    function renderGrid(data) {
-      if (data.length === 0) {
-        elements.grid.innerHTML = '<p style="grid-column: 1 / -1; text-align: center; padding: 2rem; color: #666;">Nenhuma atividade encontrada.</p>';
+    function getGrouped(list) {
+      if (S.group === 'none') return [['all', list]];
+      const map = {};
+      list.forEach(it => { const k = it[S.group] || '—'; (map[k] = map[k] || []).push(it); });
+      const entries = Object.entries(map);
+      if (S.group === 'dia') {
+        const ord = ['25/05', '26/05', '27/05', '28/05', '29/05', '30/05', '—'];
+        entries.sort(([a], [b]) => ord.indexOf(a) - ord.indexOf(b));
+      } else {
+        entries.sort(([a], [b]) => a.localeCompare(b, 'pt-BR'));
+      }
+      return entries;
+    }
+
+    // ═══════════════════════════════
+    //  RENDER CALENDAR
+    // ═══════════════════════════════
+    function renderCal() {
+      const cal = document.getElementById('cal');
+      cal.innerHTML = CAL_DAYS.map(({ dia, dn, dow, month }) => {
+        const di = ITEMS.filter(i => i.dia === dia);
+        const locs = [...new Set(di.map(i => i.local).filter(Boolean))].slice(0, 8);
+        const dots = locs.map(l => `<div class="cal-dot" style="background:${dotColor(l)}"></div>`).join('');
+        return `<div class="cal-day${S.dia === dia ? ' on' : ''}" onclick="toggleDia('${dia}')">
+      <div class="dow">${dow}</div>
+      <div class="dn">${dn}</div>
+      <div class="month">${month}</div>
+      <div class="cal-dots">${dots}</div>
+      <div class="cnt">${di.length} ativ.</div>
+    </div>`;
+      }).join('');
+    }
+
+    // ═══════════════════════════════
+    //  RENDER ACTIVE FILTER TAGS
+    // ═══════════════════════════════
+    function renderActiveTags() {
+      const bar = document.getElementById('active-bar');
+      const tags = [];
+      if (S.dia !== 'all') tags.push({ label: 'Dia ' + S.dia, clear: () => setDia('all') });
+      if (S.curso !== 'all') tags.push({ label: 'Curso: ' + S.curso, clear: () => setCurso('all') });
+      if (S.pub !== 'all') tags.push({ label: 'Público: ' + S.pub, clear: () => setPub('all') });
+      if (S.hor !== 'all') tags.push({ label: 'Horário: ' + S.hor, clear: () => setHor('all') });
+      if (S.search) tags.push({ label: '"' + S.search + '"', clear: () => { S.search = ''; document.getElementById('srch').value = ''; render(); } });
+      if (!tags.length) { bar.classList.remove('show'); return; }
+      bar.classList.add('show');
+      bar.innerHTML = `<span class="af-label">Filtros:</span>` +
+        tags.map((t, i) => `<span class="af-tag" onclick="(${i},[${i}][0])">
+      ${t.label}
+      <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2 2l8 8M10 2l-8 8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    </span>`).join('');
+      // Attach click handlers
+      bar.querySelectorAll('.af-tag').forEach((el, i) => el.addEventListener('click', tags[i].clear));
+    }
+
+    // ═══════════════════════════════
+    //  RENDER MAIN
+    // ═══════════════════════════════
+    function render() {
+      renderCal();
+      const f = getFiltered();
+      const gs = getGrouped(f);
+
+      // Stats
+      const tv = ITEMS.reduce((s, i) => { const n = parseInt(i.vagas); return isNaN(n) ? s : s + n; }, 0);
+      document.getElementById('stats').innerHTML = [
+        [ITEMS.length, 'atividades'],
+        [tv.toLocaleString('pt-BR'), 'vagas'],
+        [new Set(ITEMS.map(i => i.curso)).size, 'cursos'],
+      ].map(([v, l]) => `<div class="stat-card"><div class="stat-v">${v}</div><div class="stat-l">${l}</div></div>`).join('');
+
+      // Course dropdown
+      const sel = document.getElementById('curso-sel');
+      const cursos = [...new Set(ITEMS.map(i => i.curso))].sort((a, b) => a.localeCompare(b, 'pt-BR'));
+      sel.innerHTML = `<option value="all">Todos os cursos</option>` +
+        cursos.map(c => `<option value="${c}"${S.curso === c ? ' selected' : ''}>${c}</option>`).join('');
+
+      // Pub chips
+      document.getElementById('pub-chips').innerHTML =
+        ['all', 'Integrada', 'Curso', 'Aberto ao Público'].map(p =>
+          `<button class="chip${S.pub === p ? ' on' : ''}" onclick="setPub('${p}')">${p === 'all' ? 'Todos' : p}</button>`
+        ).join('');
+
+      // Horário chips
+      const hors = [...new Set(ITEMS.map(i => i.horario).filter(Boolean))].sort();
+      document.getElementById('hor-chips').innerHTML =
+        ['all', ...hors].map(h =>
+          `<button class="chip${S.hor === h ? ' on' : ''}" onclick="setHor('${h}')">${h === 'all' ? 'Todos' : h}</button>`
+        ).join('');
+
+      // Group buttons
+      document.getElementById('grp-btns').innerHTML =
+        [['curso', 'Curso'], ['dia', 'Dia'], ['local', 'Local'], ['publico', 'Público']].map(([v, l]) =>
+          `<button class="grpbtn${S.group === v ? ' on' : ''}" onclick="setGrp('${v}')">${l}</button>`
+        ).join('');
+
+      // Clear btn
+      document.getElementById('clear-btn').classList.toggle('hidden', !hasFilters());
+
+      // Active filter tags
+      renderActiveTags();
+
+      // Detail bar
+      const det = document.getElementById('det-bar');
+      if (S.sel) {
+        det.style.display = 'flex';
+        det.innerHTML = [
+          ['Curso', S.sel.curso], ['Tipo', S.sel.tipo], ['Atividade', S.sel.nome],
+          ['Local', S.sel.local], ['Data', S.sel.data ? S.sel.data : '—'],
+          ['Horário', S.sel.horario ? S.sel.horario : '—'], ['Público', S.sel.publico],
+          ['Vagas', S.sel.vagas ? S.sel.vagas + ' vagas' : '—'],
+        ].filter(([, v]) => v).map(([k, v]) =>
+          `<div class="det-it"><span class="det-k">${k}</span><span class="det-v">${v}</span></div>`
+        ).join('') + `<button class="det-cls" onclick="clearSel()">&#215;</button>`;
+      } else { det.style.display = 'none'; }
+
+      // Content
+      const content = document.getElementById('content');
+      if (!gs.length || !f.length) {
+        content.innerHTML = `<div class="empty-state">
+      <div class="empty-icon">🔍</div>
+      <div class="empty-title">Nenhuma atividade encontrada</div>
+      <div class="empty-sub">Tente outros termos ou ajuste os filtros</div>
+      <button class="empty-clear" onclick="clearAll()">Limpar todos os filtros</button>
+    </div>`;
         return;
       }
-      const group = filterState.group;
-      let html = '';
-      if (group === 'none') {
-        html = data.map(a => renderCard(a, group)).join('');
-      } else {
-        const grouped = data.reduce((acc, a) => {
-          const key = a[group];
-          if (!acc[key]) acc[key] = [];
-          acc[key].push(a);
-          return acc;
-        }, {});
-        for (const key in grouped) {
-          html += `
-                        <div class="group-section">
-                            <h3>${key}</h3>
-                            <div class="grid">${grouped[key].map(a => renderCard(a, group)).join('')}</div>
-                        </div>
-                    `;
+
+      const DOW = { '25/05': 'Seg', '26/05': 'Ter', '27/05': 'Qua', '28/05': 'Qui', '29/05': 'Sex', '30/05': 'Sáb' };
+
+      content.innerHTML = gs.map(([gn, gi]) => {
+        const colV = gi.reduce((s, i) => { const n = parseInt(i.vagas); return isNaN(n) ? s : s + n; }, 0);
+        const diasGrp = [...new Set(gi.map(i => i.dia).filter(Boolean))].sort();
+
+        let secLabel = gn;
+        let secDot = '';
+        if (S.group === 'dia' && gn !== '—') {
+          secLabel = `${DOW[gn] || ''} · ${gn} de maio`;
         }
-      }
-      elements.grid.innerHTML = html;
+
+        const metaStr = [
+          `${gi.length} atividade${gi.length !== 1 ? 's' : ''}`,
+          colV ? colV.toLocaleString('pt-BR') + ' vagas' : '',
+          diasGrp.length && S.group !== 'dia' ? diasGrp.map(d => `${DOW[d] || ''} ${d}`).join(', ') : '',
+        ].filter(Boolean).join(' · ');
+
+        const cards = gi.map(it => {
+          const ts = tipoStyle(it.tipo);
+          const lc = locClr(it.local);
+          const pc = pubClr(it.publico);
+          const isSel = S.sel && S.sel.id === it.id;
+
+          const diaBadge = it.dia && S.group !== 'dia'
+            ? `<span class="dia-badge">
+            <svg width="9" height="9" viewBox="0 0 14 14" fill="none"><rect x="1" y="2" width="12" height="11" rx="2" stroke="currentColor" stroke-width="1.3"/><path d="M4 1v2M10 1v2M1 6h12" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+            ${DOW[it.dia] || ''} ${it.dia}
+           </span>`
+            : '';
+
+          const curso = it.curso && S.group !== 'curso'
+            ? `<div class="card-curso-sub">${it.curso}</div>` : '';
+
+          const locHtml = it.local
+            ? `<div class="card-loc" style="background:${lc.bg};color:${lc.tx}">
+            <svg width="10" height="10" viewBox="0 0 14 14" fill="none"><path d="M7 1a4 4 0 0 1 4 4c0 3-4 8-4 8S3 8 3 5a4 4 0 0 1 4-4z" stroke="currentColor" stroke-width="1.3"/><circle cx="7" cy="5" r="1.2" fill="currentColor"/></svg>
+            ${it.local}
+           </div>`
+            : '';
+
+          const vagasHtml = it.vagas
+            ? `<div class="card-vagas">
+            <svg width="10" height="10" viewBox="0 0 14 14" fill="none"><circle cx="5" cy="4" r="2" stroke="currentColor" stroke-width="1.3"/><path d="M1 12c0-2.2 1.8-4 4-4h0c2.2 0 4 1.8 4 4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><circle cx="10" cy="4" r="1.5" stroke="currentColor" stroke-width="1.2"/><path d="M11 8.5c1 .4 2 1.4 2 3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+            ${it.vagas}
+           </div>`
+            : '';
+
+          const horHtml = it.horario
+            ? `<div class="card-hor">
+            <svg width="10" height="10" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.3"/><path d="M7 4v3.5l2 1.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+            ${it.horario}
+           </div>`
+            : '';
+
+          return `<div class="card${isSel ? ' sel' : ''}" onclick="selCard(${it.id})" style="border-left-color:${ts.bc || ts.brd}">
+        <div class="card-top">
+          <div class="card-meta">
+            <span class="tipo-badge" style="background:${ts.bg};color:${ts.tx};border:1px solid ${ts.brd}">${tipoLabel(it.tipo)}</span>
+            ${diaBadge}
+          </div>
+          ${curso}
+          <div class="card-title">${it.nome || it.tipo}</div>
+          ${it.nome && it.nome !== it.tipo ? `<div class="card-nome">${it.tipo}</div>` : ''}
+        </div>
+        <div class="card-bot">
+          ${locHtml}
+          <div class="card-footer">
+            ${it.publico ? `<span class="card-pub" style="background:${pc.bg};color:${pc.tx}">${it.publico}</span>` : '<span></span>'}
+            <div class="card-info">
+              ${vagasHtml}
+              ${horHtml}
+            </div>
+          </div>
+        </div>
+      </div>`;
+        }).join('');
+
+        return `<div>
+      <div class="section-hdr">
+        <div class="s-dot" style="background:${S.group === 'dia' ? '#f59e0b' : S.group === 'local' ? '#0891b2' : S.group === 'publico' ? '#be185d' : 'var(--green)'}"></div>
+        <span class="s-name">${secLabel}</span>
+        <span class="s-meta">${metaStr}</span>
+        <div class="s-line"></div>
+      </div>
+      <div class="card-grid">${cards}</div>
+    </div>`;
+      }).join('');
     }
 
-    function renderCard(activity, group) {
-      const showDay = group !== 'dia';
-      const showCurso = group !== 'curso';
-      const tipoColor = tipoColors[activity.tipo] || '#ccc';
-      const localColor = localColors[activity.local] || '#ccc';
-      return `
-                <div class="card" onclick="showDetails(${JSON.stringify(activity).replace(/"/g, '&quot;')})" style="cursor: pointer;">
-                    <div class="badges-top">
-                        ${showDay ? `<span class="badge dia">${activity.dia}</span>` : ''}
-                        <span class="badge tipo" style="background: ${tipoColor};">${activity.tipo}</span>
-                    </div>
-                    ${showCurso ? `<div class="curso">${activity.curso}</div>` : ''}
-                    <h3>${activity.nome}</h3>
-                    <div class="local">
-                        <span class="local-dot" style="background: ${localColor};"></span>
-                        ${activity.local}
-                    </div>
-                    <div class="info-badges">
-                        <span class="badge publico">${activity.publico}</span>
-                        <span class="badge vagas">${activity.vagas} vagas</span>
-                        <span class="badge horario">${activity.horario}</span>
-                    </div>
-                </div>
-            `;
+    // ═══════════════════════════════
+    //  ACTIONS
+    // ═══════════════════════════════
+    function setPub(p) { S.pub = p; render(); }
+    function setHor(h) { S.hor = h; render(); }
+    function setGrp(g) { S.group = g; render(); }
+    function setCurso(c) { S.curso = c; render(); }
+    function clearSel() { S.sel = null; render(); }
+    function toggleDia(d) { S.dia = S.dia === d ? 'all' : d; render(); }
+    function selCard(id) {
+      const it = ITEMS.find(i => i.id === id);
+      S.sel = S.sel && S.sel.id === id ? null : it;
+      render();
+    }
+    function clearAll() {
+      S.search = ''; S.pub = 'all'; S.hor = 'all'; S.dia = 'all'; S.curso = 'all';
+      S.sel = null;
+      document.getElementById('srch').value = '';
+      document.getElementById('curso-sel').value = 'all';
+      render();
     }
 
-    function renderActiveFilters() {
-      let html = '';
-      if (filterState.day !== 'all') {
-        html += `<span class="active-tag">Dia: ${filterState.day} <button class="remove-tag" onclick="removeFilter('day')">×</button></span>`;
-      }
-      if (filterState.curso !== 'all') {
-        html += `<span class="active-tag">Curso: ${filterState.curso} <button class="remove-tag" onclick="removeFilter('curso')">×</button></span>`;
-      }
-      filterState.publico.forEach(p => {
-        html += `<span class="active-tag">${p} <button class="remove-tag" onclick="removePublicoFilter('${p}')">×</button></span>`;
-      });
-      filterState.horario.forEach(h => {
-        html += `<span class="active-tag">${h} <button class="remove-tag" onclick="removeHorarioFilter('${h}')">×</button></span>`;
-      });
-      if (filterState.search) {
-        html += `<span class="active-tag">${filterState.search} <button class="remove-tag" onclick="removeFilter('search')">×</button></span>`;
-      }
-      elements.activeFilters.innerHTML = html;
+    let _tt;
+    function showToast(msg) {
+      const el = document.getElementById('toast');
+      el.textContent = msg; el.classList.add('show');
+      clearTimeout(_tt); _tt = setTimeout(() => el.classList.remove('show'), 2800);
     }
 
-    function setupEventListeners() {
-      elements.search.oninput = (e) => {
-        filterState.search = e.target.value;
-        applyFilters();
-      };
-      elements.cursoFilter.onchange = (e) => {
-        filterState.curso = e.target.value === 'all' ? 'all' : e.target.value;
-        applyFilters();
-      };
-      elements.groupSelect.onchange = (e) => {
-        filterState.group = e.target.value;
-        applyFilters();
-      };
-      elements.clearFilters.onclick = () => {
-        filterState = { search: '', day: 'all', curso: 'all', publico: [], horario: [], group: 'none' };
-        elements.search.value = '';
-        elements.cursoFilter.value = 'all';
-        elements.groupSelect.value = 'none';
-        document.querySelectorAll('.pub-btn, .chip').forEach(btn => btn.classList.remove('active'));
-        document.querySelector('.day-btn[data-day="all"]').classList.add('active');
-        document.querySelectorAll('.day-btn[data-day!="all"]').forEach(btn => btn.classList.remove('active'));
-        applyFilters();
-      };
+    document.getElementById('srch').addEventListener('input', e => { S.search = e.target.value; render(); });
 
-      // Calendar
-      elements.calendar.addEventListener('click', (e) => {
-        if (e.target.classList.contains('day-btn')) {
-          document.querySelectorAll('.day-btn').forEach(btn => btn.classList.remove('active'));
-          e.target.classList.add('active');
-          filterState.day = e.target.dataset.day;
-          applyFilters();
-        }
-      });
-
-      // Publico buttons
-      document.querySelectorAll('.pub-btn').forEach(btn => {
-        btn.onclick = () => {
-          btn.classList.toggle('active');
-          filterState.publico = Array.from(document.querySelectorAll('.pub-btn.active')).map(b => b.dataset.pub);
-          applyFilters();
-        };
-      });
-
-      // Horario chips
-      document.querySelectorAll('.chip').forEach(chip => {
-        chip.onclick = () => {
-          chip.classList.toggle('active');
-          filterState.horario = Array.from(document.querySelectorAll('.chip.active')).map(c => c.dataset.time);
-          applyFilters();
-        };
-      });
-    }
-
-    function removeFilter(key) {
-      if (key === 'day') filterState.day = 'all';
-      if (key === 'curso') filterState.curso = 'all';
-      if (key === 'search') filterState.search = ''; elements.search.value = '';
-      // Update UI
-      if (key === 'day') {
-        document.querySelector('.day-btn[data-day="all"]').classList.add('active');
-        document.querySelectorAll('.day-btn[data-day!="all"]').forEach(btn => btn.classList.remove('active'));
-      }
-      if (key === 'curso') elements.cursoFilter.value = 'all';
-      applyFilters();
-    }
-
-    function removePublicoFilter(pub) {
-      filterState.publico = filterState.publico.filter(p => p !== pub);
-      document.querySelector(`.pub-btn[data-pub="${pub}"]`).classList.remove('active');
-      applyFilters();
-    }
-
-    function removeHorarioFilter(hor) {
-      filterState.horario = filterState.horario.filter(t => t !== hor);
-      document.querySelector(`.chip[data-time="${hor}"]`).classList.remove('active');
-      applyFilters();
-    }
-
-    function showDetails(activity) {
-      elements.detailsContent.innerHTML = `
-                <dt>Nome</dt>
-                <dd>${activity.nome}</dd>
-                <dt>Curso</dt>
-                <dd>${activity.curso}</dd>
-                <dt>Tipo</dt>
-                <dd>${activity.tipo}</dd>
-                <dt>Data/Dia</dt>
-                <dd>${activity.dia} (${activity.data})</dd>
-                <dt>Horário</dt>
-                <dd>${activity.horario}</dd>
-                <dt>Local</dt>
-                <dd>${activity.local}</dd>
-                <dt>Público</dt>
-                <dd>${activity.publico}</dd>
-                <dt>Vagas</dt>
-                <dd>${activity.vagas}</dd>
-            `;
-      elements.detailsPanel.classList.add('show');
-      elements.backdrop.classList.add('show');
-    }
-
-    function closeDetails() {
-      elements.detailsPanel.classList.remove('show');
-      elements.backdrop.classList.remove('show');
-    }
-
-    // Initial render
-    function render() {
-      applyFilters();
-    }
-
-    init();
+    render();
   </script>
 </body>
 
