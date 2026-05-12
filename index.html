@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Semana Acadêmica Integrada 2026 - UNICEPLAC</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background: #f8f9fa;
+    }
+
+    .header {
+      background: linear-gradient(135deg, #00734f 0%, #421b71 100%);
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .logo {
+      width: 12rem;
+      height: 3rem;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .title {
+      flex: 1;
+      text-align: center;
+      font-size: 2rem;
+      font-weight: 300;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+
+    .stat {
+      background: rgba(255, 255, 255, 0.2);
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .calendar-strip {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 1rem;
+      background: white;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .day-btn {
+      padding: 0.75rem 1.5rem;
+      border: none;
+      background: #f1f3f4;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-weight: 500;
+    }
+
+    .day-btn.active {
+      background: #667eea;
+      color: white;
+    }
+
+    .day-btn:hover {
+      background: #667eea;
+      opacity: 0.8;
+      color: white;
+    }
+
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      padding: 1rem 2rem;
+      background: white;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .filters input,
+    .filters select {
+      padding: 0.75rem;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      flex: 1;
+      min-width: 200px;
+    }
+
+    .filter-group {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .pub-btn,
+    .chip {
+      padding: 0.5rem 1rem;
+      border: 1px solid #ddd;
+      background: white;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .pub-btn.active,
+    .chip.active {
+      background: #667eea;
+      color: white;
+      border-color: #667eea;
+    }
+
+    .btn-clear {
+      padding: 0.75rem 1.5rem;
+      background: #e74c3c;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 500;
+    }
+
+    .active-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      padding: 1rem 2rem;
+      background: white;
+    }
+
+    .active-tag {
+      background: #e3f2fd;
+      color: #1976d2;
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.875rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .remove-tag {
+      background: #bbdefb;
+      color: #1976d2;
+      border: none;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+      font-size: 0.875rem;
+    }
+
+    .activities {
+      padding: 2rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .group-section {
+      margin-bottom: 3rem;
+    }
+
+    .group-section h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: #333;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .card {
+      background: white;
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .badges-top {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+    }
+
+    .badge {
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: white;
+    }
+
+    .badge.tipo {
+      font-size: 0.7rem;
+    }
+
+    .badge.dia {
+      background: #95a5a6;
+    }
+
+    .badge.publico {
+      background: #f39c12;
+    }
+
+    .badge.vagas {
+      background: #27ae60;
+    }
+
+    .badge.horario {
+      background: #3498db;
+      font-size: 0.7rem;
+    }
+
+    .curso {
+      color: #7f8c8d;
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .card h3 {
+      font-size: 1.25rem;
+      margin-bottom: 1rem;
+      color: #2c3e50;
+    }
+
+    .local {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+      color: #555;
+    }
+
+    .local-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+
+    .info-badges {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .details-panel {
+      position: fixed;
+      top: 0;
+      right: -400px;
+      width: 400px;
+      height: 100vh;
+      background: white;
+      box-shadow: -5px 0 20px rgba(0, 0, 0, 0.2);
+      transition: right 0.3s;
+      z-index: 1000;
+      padding: 2rem;
+      overflow-y: auto;
+    }
+
+    .details-panel.show {
+      right: 0;
+    }
+
+    .details-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .close-btn {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #999;
+    }
+
+    .details-content dt {
+      font-weight: 500;
+      color: #555;
+      margin-top: 1rem;
+    }
+
+    .details-content dd {
+      margin-bottom: 1rem;
+    }
+
+    .backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s;
+      z-index: 999;
+    }
+
+    .backdrop.show {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    @media (max-width: 768px) {
+      .header {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .stats {
+        grid-template-columns: 1fr;
+      }
+
+      .filters {
+        flex-direction: column;
+      }
+
+      .filters input,
+      .filters select {
+        min-width: auto;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .details-panel {
+        width: 100vw;
+        right: -100vw;
+      }
+
+      .details-panel.show {
+        right: 0;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .calendar-strip {
+        flex-wrap: wrap;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="header">
+    <a href="https://uniceplac.edu.br" target="_blank">
+      <img class="logo" src="../semana_academica/assets/Horizontal-Letra-Branca.png" alt="UNICEPLAC" />
+    </a>
+    <h1 class="title">Semana Acadêmica Integrada 2026</h1>
+    <div class="stats">
+      <div class="stat"><strong id="total-ativ">0</strong><br>Atividades</div>
+      <div class="stat"><strong id="total-vagas">0</strong><br>Vagas</div>
+      <div class="stat"><strong id="num-cursos">0</strong><br>Cursos</div>
+    </div>
+  </header>
+
+  <div class="calendar-strip" id="calendar">
+    <!-- Populated by JS -->
+  </div>
+
+  <div class="filters">
+    <input type="text" id="search" placeholder="Buscar por nome, curso ou local...">
+    <select id="curso-filter">
+      <option value="all">Todos os Cursos</option>
+      <!-- Populated -->
+    </select>
+    <div class="filter-group">
+      <button class="pub-btn" data-pub="Integrada">Integrada</button>
+      <button class="pub-btn" data-pub="Curso">Curso</button>
+      <button class="pub-btn" data-pub="Aberto ao Público">Aberto ao Público</button>
+    </div>
+    <div class="filter-group">
+      <button class="chip" data-time="Matutino">Matutino</button>
+      <button class="chip" data-time="Tarde">Tarde</button>
+      <button class="chip" data-time="Noturno">Noturno</button>
+    </div>
+    <select id="group-select">
+      <option value="none">Sem agrupamento</option>
+      <option value="dia">Por Dia</option>
+      <option value="curso">Por Curso</option>
+      <option value="local">Por Local</option>
+      <option value="publico">Por Público</option>
+    </select>
+    <button class="btn-clear" id="clear-filters">Limpar Filtros</button>
+  </div>
+
+  <div class="active-filters" id="active-filters"></div>
+
+  <div class="activities">
+    <div id="activities-grid" class="grid"></div>
+  </div>
+
+  <div class="backdrop" id="backdrop" onclick="closeDetails()"></div>
+  <div class="details-panel" id="details-panel">
+    <div class="details-header">
+      <h2>Detalhes da Atividade</h2>
+      <button class="close-btn" onclick="closeDetails()">×</button>
+    </div>
+    <dl class="details-content" id="details-content"></dl>
+  </div>
+
+  <script>
+    // Data generation
+    const courses = ['Administração', 'Direito', 'Enfermagem', 'Engenharia Civil', 'Pedagogia', 'Contabilidade', 'Medicina Veterinária', 'Arquitetura', 'Psicologia', 'Engenharia de Produção'];
+    const tipos = ['Palestra', 'Workshop', 'Mesa Redonda', 'Minicurso', 'Painel', 'Apresentação', 'Debate'];
+    const locais = ['Auditório Principal', 'Auditório Secundário', 'Sala 101', 'Sala 102', 'Sala 103', 'Laboratório 1', 'Laboratório 2', 'Pátio Central', 'Sala de Conferências'];
+    const publicos = ['Integrada', 'Curso', 'Aberto ao Público'];
+    const horarios = ['08:00 - 10:00', '10:30 - 12:00', '14:00 - 16:00', '16:30 - 18:00', '19:00 - 21:00'];
+    const tipoColors = {
+      'Palestra': '#FF4757',
+      'Workshop': '#1E90FF',
+      'Mesa Redonda': '#FFA502',
+      'Minicurso': '#2ED573',
+      'Painel': '#FF9FF3',
+      'Apresentação': '#00D2D3',
+      'Debate': '#FF6348'
+    };
+    const localColors = {
+      'Auditório Principal': '#FF6B35',
+      'Auditório Secundário': '#F7931E',
+      'Sala 101': '#00A8CC',
+      'Sala 102': '#00B894',
+      'Sala 103': '#6C5CE7',
+      'Laboratório 1': '#A29BFE',
+      'Laboratório 2': '#FD79A8',
+      'Pátio Central': '#00B894',
+      'Sala de Conferências': '#E17055'
+    };
+
+    let activities = [];
+    let idCounter = 1;
+    for (let d = 25; d <= 30; d++) {
+      for (let h = 0; h < 14; h++) {
+        const tipoIdx = Math.floor((idCounter - 1) / 12 % tipos.length);
+        const nome = `${tipos[tipoIdx]} sobre ${courses[(idCounter - 1) % 5].toLowerCase()}`;
+        activities.push({
+          id: idCounter++,
+          curso: courses[(idCounter - 2) % courses.length],
+          tipo: tipos[tipoIdx],
+          nome: nome,
+          local: locais[(idCounter - 2) % locais.length],
+          publico: publicos[Math.floor((idCounter - 2) / 28 % publicos.length)],
+          vagas: 50 + ((idCounter - 1) % 150),
+          horario: horarios[Math.floor((idCounter - 2) / 6 % horarios.length)],
+          data: `2026-05-${d.toString().padStart(2, '0')}`,
+          dia: `${d}/05`
+        });
+      }
+    }
+
+    // State
+    let filterState = {
+      search: '',
+      day: 'all',
+      curso: 'all',
+      publico: [],
+      horario: [],
+      group: 'none'
+    };
+
+    // Elements
+    const elements = {
+      search: document.getElementById('search'),
+      cursoFilter: document.getElementById('curso-filter'),
+      groupSelect: document.getElementById('group-select'),
+      calendar: document.getElementById('calendar'),
+      activeFilters: document.getElementById('active-filters'),
+      grid: document.getElementById('activities-grid'),
+      totalAtiv: document.getElementById('total-ativ'),
+      totalVagas: document.getElementById('total-vagas'),
+      numCursos: document.getElementById('num-cursos'),
+      detailsPanel: document.getElementById('details-panel'),
+      detailsContent: document.getElementById('details-content'),
+      backdrop: document.getElementById('backdrop'),
+      clearFilters: document.getElementById('clear-filters')
+    };
+
+    // Init
+    function init() {
+      updateStats();
+      populateCalendar();
+      populateCursoFilter();
+      render();
+      setupEventListeners();
+    }
+
+    function updateStats() {
+      elements.totalAtiv.textContent = activities.length;
+      const totalVagas = activities.reduce((sum, a) => sum + a.vagas, 0);
+      elements.totalVagas.textContent = totalVagas.toLocaleString();
+      const uniqueCursos = new Set(activities.map(a => a.curso));
+      elements.numCursos.textContent = uniqueCursos.size;
+    }
+
+    function populateCalendar() {
+      elements.calendar.innerHTML = '<button class="day-btn active" data-day="all">Todos</button>' +
+        [25, 26, 27, 28, 29, 30].map(d => `<button class="day-btn" data-day="${d}/05">${d}/05</button>`).join('');
+    }
+
+    function populateCursoFilter() {
+      const uniqueCursos = [...new Set(activities.map(a => a.curso))].sort();
+      elements.cursoFilter.innerHTML = '<option value="all">Todos os Cursos</option>' +
+        uniqueCursos.map(c => `<option value="${c}">${c}</option>`).join('');
+    }
+
+    function getTimeSlot(horario) {
+      const startHour = parseInt(horario.split(' - ')[0].split(':')[0]);
+      if (startHour < 12) return 'Matutino';
+      if (startHour < 18) return 'Tarde';
+      return 'Noturno';
+    }
+
+    function applyFilters() {
+      let filtered = activities.filter(activity => {
+        if (filterState.day !== 'all' && activity.dia !== filterState.day) return false;
+        if (filterState.curso !== 'all' && activity.curso !== filterState.curso) return false;
+        if (filterState.publico.length > 0 && !filterState.publico.includes(activity.publico)) return false;
+        if (filterState.horario.length > 0) {
+          const timeSlot = getTimeSlot(activity.horario);
+          if (!filterState.horario.includes(timeSlot)) return false;
+        }
+        const searchLower = filterState.search.toLowerCase();
+        if (searchLower && !activity.nome.toLowerCase().includes(searchLower) &&
+          !activity.curso.toLowerCase().includes(searchLower) &&
+          !activity.local.toLowerCase().includes(searchLower)) return false;
+        return true;
+      });
+      renderGrid(filtered);
+      renderActiveFilters();
+    }
+
+    function renderGrid(data) {
+      if (data.length === 0) {
+        elements.grid.innerHTML = '<p style="grid-column: 1 / -1; text-align: center; padding: 2rem; color: #666;">Nenhuma atividade encontrada.</p>';
+        return;
+      }
+      const group = filterState.group;
+      let html = '';
+      if (group === 'none') {
+        html = data.map(a => renderCard(a, group)).join('');
+      } else {
+        const grouped = data.reduce((acc, a) => {
+          const key = a[group];
+          if (!acc[key]) acc[key] = [];
+          acc[key].push(a);
+          return acc;
+        }, {});
+        for (const key in grouped) {
+          html += `
+                        <div class="group-section">
+                            <h3>${key}</h3>
+                            <div class="grid">${grouped[key].map(a => renderCard(a, group)).join('')}</div>
+                        </div>
+                    `;
+        }
+      }
+      elements.grid.innerHTML = html;
+    }
+
+    function renderCard(activity, group) {
+      const showDay = group !== 'dia';
+      const showCurso = group !== 'curso';
+      const tipoColor = tipoColors[activity.tipo] || '#ccc';
+      const localColor = localColors[activity.local] || '#ccc';
+      return `
+                <div class="card" onclick="showDetails(${JSON.stringify(activity).replace(/"/g, '&quot;')})" style="cursor: pointer;">
+                    <div class="badges-top">
+                        ${showDay ? `<span class="badge dia">${activity.dia}</span>` : ''}
+                        <span class="badge tipo" style="background: ${tipoColor};">${activity.tipo}</span>
+                    </div>
+                    ${showCurso ? `<div class="curso">${activity.curso}</div>` : ''}
+                    <h3>${activity.nome}</h3>
+                    <div class="local">
+                        <span class="local-dot" style="background: ${localColor};"></span>
+                        ${activity.local}
+                    </div>
+                    <div class="info-badges">
+                        <span class="badge publico">${activity.publico}</span>
+                        <span class="badge vagas">${activity.vagas} vagas</span>
+                        <span class="badge horario">${activity.horario}</span>
+                    </div>
+                </div>
+            `;
+    }
+
+    function renderActiveFilters() {
+      let html = '';
+      if (filterState.day !== 'all') {
+        html += `<span class="active-tag">Dia: ${filterState.day} <button class="remove-tag" onclick="removeFilter('day')">×</button></span>`;
+      }
+      if (filterState.curso !== 'all') {
+        html += `<span class="active-tag">Curso: ${filterState.curso} <button class="remove-tag" onclick="removeFilter('curso')">×</button></span>`;
+      }
+      filterState.publico.forEach(p => {
+        html += `<span class="active-tag">${p} <button class="remove-tag" onclick="removePublicoFilter('${p}')">×</button></span>`;
+      });
+      filterState.horario.forEach(h => {
+        html += `<span class="active-tag">${h} <button class="remove-tag" onclick="removeHorarioFilter('${h}')">×</button></span>`;
+      });
+      if (filterState.search) {
+        html += `<span class="active-tag">${filterState.search} <button class="remove-tag" onclick="removeFilter('search')">×</button></span>`;
+      }
+      elements.activeFilters.innerHTML = html;
+    }
+
+    function setupEventListeners() {
+      elements.search.oninput = (e) => {
+        filterState.search = e.target.value;
+        applyFilters();
+      };
+      elements.cursoFilter.onchange = (e) => {
+        filterState.curso = e.target.value === 'all' ? 'all' : e.target.value;
+        applyFilters();
+      };
+      elements.groupSelect.onchange = (e) => {
+        filterState.group = e.target.value;
+        applyFilters();
+      };
+      elements.clearFilters.onclick = () => {
+        filterState = { search: '', day: 'all', curso: 'all', publico: [], horario: [], group: 'none' };
+        elements.search.value = '';
+        elements.cursoFilter.value = 'all';
+        elements.groupSelect.value = 'none';
+        document.querySelectorAll('.pub-btn, .chip').forEach(btn => btn.classList.remove('active'));
+        document.querySelector('.day-btn[data-day="all"]').classList.add('active');
+        document.querySelectorAll('.day-btn[data-day!="all"]').forEach(btn => btn.classList.remove('active'));
+        applyFilters();
+      };
+
+      // Calendar
+      elements.calendar.addEventListener('click', (e) => {
+        if (e.target.classList.contains('day-btn')) {
+          document.querySelectorAll('.day-btn').forEach(btn => btn.classList.remove('active'));
+          e.target.classList.add('active');
+          filterState.day = e.target.dataset.day;
+          applyFilters();
+        }
+      });
+
+      // Publico buttons
+      document.querySelectorAll('.pub-btn').forEach(btn => {
+        btn.onclick = () => {
+          btn.classList.toggle('active');
+          filterState.publico = Array.from(document.querySelectorAll('.pub-btn.active')).map(b => b.dataset.pub);
+          applyFilters();
+        };
+      });
+
+      // Horario chips
+      document.querySelectorAll('.chip').forEach(chip => {
+        chip.onclick = () => {
+          chip.classList.toggle('active');
+          filterState.horario = Array.from(document.querySelectorAll('.chip.active')).map(c => c.dataset.time);
+          applyFilters();
+        };
+      });
+    }
+
+    function removeFilter(key) {
+      if (key === 'day') filterState.day = 'all';
+      if (key === 'curso') filterState.curso = 'all';
+      if (key === 'search') filterState.search = ''; elements.search.value = '';
+      // Update UI
+      if (key === 'day') {
+        document.querySelector('.day-btn[data-day="all"]').classList.add('active');
+        document.querySelectorAll('.day-btn[data-day!="all"]').forEach(btn => btn.classList.remove('active'));
+      }
+      if (key === 'curso') elements.cursoFilter.value = 'all';
+      applyFilters();
+    }
+
+    function removePublicoFilter(pub) {
+      filterState.publico = filterState.publico.filter(p => p !== pub);
+      document.querySelector(`.pub-btn[data-pub="${pub}"]`).classList.remove('active');
+      applyFilters();
+    }
+
+    function removeHorarioFilter(hor) {
+      filterState.horario = filterState.horario.filter(t => t !== hor);
+      document.querySelector(`.chip[data-time="${hor}"]`).classList.remove('active');
+      applyFilters();
+    }
+
+    function showDetails(activity) {
+      elements.detailsContent.innerHTML = `
+                <dt>Nome</dt>
+                <dd>${activity.nome}</dd>
+                <dt>Curso</dt>
+                <dd>${activity.curso}</dd>
+                <dt>Tipo</dt>
+                <dd>${activity.tipo}</dd>
+                <dt>Data/Dia</dt>
+                <dd>${activity.dia} (${activity.data})</dd>
+                <dt>Horário</dt>
+                <dd>${activity.horario}</dd>
+                <dt>Local</dt>
+                <dd>${activity.local}</dd>
+                <dt>Público</dt>
+                <dd>${activity.publico}</dd>
+                <dt>Vagas</dt>
+                <dd>${activity.vagas}</dd>
+            `;
+      elements.detailsPanel.classList.add('show');
+      elements.backdrop.classList.add('show');
+    }
+
+    function closeDetails() {
+      elements.detailsPanel.classList.remove('show');
+      elements.backdrop.classList.remove('show');
+    }
+
+    // Initial render
+    function render() {
+      applyFilters();
+    }
+
+    init();
+  </script>
+</body>
+
+</html>
